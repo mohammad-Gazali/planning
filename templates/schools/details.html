@@ -1,0 +1,155 @@
+{% extends 'base.html'  %}
+{% block content %}
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <title>
+
+    </title>
+
+      
+  </head>
+<!-- top side-->
+<div class="container ">
+  <div class="mt-2">
+    <div class="" style="width: 100%;">
+     
+     
+
+        <!-- الجدول -->
+        
+         
+              <div id="accordion">
+                  <div class="card   ">
+                      <div class="card-header text-center text-success " >
+                          <h5 class="mb-1">
+
+                              {{d.school_name}}
+                              
+                          </h5>
+                      </div>
+      
+                      <div  class="collapse show " aria-labelledby="headingOne" data-parent="#accordion">
+                          <div class="card-body card  bg-light  ">
+                            <div class="table-responsive  ">
+                              <table class="table table-hover table-bordered table-striped table-sm text-center table-white">
+                                  <thead >
+                                      <tr>
+                                          <th>الرقم الإحصائي</th>
+                                          <th>نوع السلطة</th>
+                                          <th>المكتب</th>
+                                          <th>المرحلة</th>
+                                          <th>جنس المدرسة</th>
+                                          <th>عدد الطلاب</th>
+                                          <th>عدد الفصول</th>
+                                          <th>نوع التعليم</th>
+                                          <th>الحي</th>
+                                          <th>المدارس الملحقة</th>
+                                          <th>اسم مدير المدرسة </th>
+                                          <th>جوال مدير المدرسة</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr>
+                                          <td>{{d.school_nu}}</td>
+                                          <td>{{d.school_rule}}</td>
+                                          <td>{{d.office}}</td>
+                                          <td>{{d.school_stage}}</td>
+                                          <td>{{d.school_gender}}</td>
+                                          <td>{{d.total_class}}</td>
+                                          <td>{{d.total_student}}</td>
+                                          <td>{{d.school_education_system}}</td>
+                                          <td>{{d.school_Quarter}}</td>
+                                          <td>{{d.school_in}}</td>
+                                          <td>{{d.school_manager_name}}</td>
+                                          <td>{{d.school_manager_mobile}}</td>
+                                      </tr>
+                                  </tbody>
+                                  
+                              </table>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        
+
+
+
+
+    
+    
+    <!-- map -->
+    <div  class="mt-2" >
+      <!-- {% if map != null %}
+        {{map | safe}}
+      {%else%}
+        <h1>لا يوجد إحداثيات للمدرسة</h1>
+      {%endif%} -->
+
+
+      {{map | safe}}
+    </div>
+
+</div>
+
+
+  
+      <!-- جدول الملاحظات -->
+    <!-- <div class="container">
+        <div class="card card-header text-center my-4">
+           الملاحظات
+        </div>
+        {% for note in notes %}
+          {{note.title}}
+        {% endfor %} -->
+      <!-- رابط إضافة ملاحظة -->
+      <!-- <table class="table">
+          <thead class="thead-dark">
+            <a href="#">إضافة ملاحظة</a>
+            <br>
+          </thead>
+          <tbody>
+              <tr>
+                
+                
+                {%if note %}
+                <tr>
+                  <th> رقم المدرسة</th>
+                  <th>عنوان الملاحظة</th>
+                  <th>موضوع الملاحظة</th>
+                  <th>تاريخ إنشاء الملاحظة</th>
+                  <th>مُنشيء الملاحظة</th>
+                </tr>
+                  {% for note in note %}
+                  <tr>
+                  <td>{{note.school_nu}}</td>
+                  <td>{{note.title}}</td>
+                  <td>{{note.subject}}</td>
+                  <td>{{note.created_dt | date}}</td>
+                  <td>{{note.created_user}}</td>
+                 <br>
+                                 
+                 {% endfor %}
+                 {%else%} 
+                    <h6>لا يوجد ملاحظات</h6>
+                {%endif%}
+
+                
+                
+            </tr>
+           
+          </tbody>
+      </table> -->
+      
+    <!-- </div> -->
+  
+</div>
+
+{% endblock content %}

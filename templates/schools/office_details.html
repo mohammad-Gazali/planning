@@ -1,0 +1,92 @@
+{% extends 'base.html'  %}
+{% block content %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title> {{office_name}}</title>
+
+  </head>
+<body>
+<!-- top side-->
+
+
+
+  <div id= 'mainDiv' class=" container row">
+    <div id = 'schools' style="width: 50%;" class="container">
+      <div id="results" class="card">
+        <div class="card-header text-center">قائمة المدارس </div>
+        <div class="card-body">
+        {%for i in od%}
+      <a style="text-decoration: none;" href="{% url 'detail' i.school_nu %}">{{i.school_name}}</a><p></p>
+      {%endfor%}
+      </div>
+      <!-- pagination -->
+      <div class="col-4  mt-3 offset-1 ">
+        <nav aria-label="">
+          <ul class="pagination">
+      
+            {% if od.has_previous %}
+              <li class="page-item">
+                <a href="?page={{ od.previous_page_number }}" class="page-link">السابق</a>
+              </li>
+              <li>
+                <a class="page-link" href="?page={{ od.previous_page_number }}">
+                  {{ od.previous_page_number }}
+                </a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <span class="page-link">السابق</span>
+              </li>
+            {% endif %}
+      
+            <li class="page-item active">
+              <span class="page-link">{{ od.number }}</span>
+            </li>
+      
+            {% if od.has_next %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ od.next_page_number }}">
+                  {{ od.next_page_number }}
+                </a>
+              </li>
+              <li class="page-item ">
+                <a class="page-link" href="?page={{ od.next_page_number }}">التالي</a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <span class="page-link">التالي</span>
+              </li>
+            {% endif %}
+      
+          </ul>
+        </nav>
+      </div>
+      
+    </div>
+
+
+  </div>
+
+
+    <div class="container  row mt-3">
+      <div class='card  ' style="width: 100%; border: 3px;border-radius: 10px;">
+        
+
+              
+      </div>
+      <div class='row' style="width: 40%; border: 3px;border-radius: 10px;">
+
+      </div>
+      
+     
+    </div>
+</div>
+</body>
+</html>
+{% endblock content %}
