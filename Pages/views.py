@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import folium
-import json 
+import json
 import os
 from django.conf import settings
 import random
@@ -19,7 +19,7 @@ def style_fcn(x):
             'fillOpacity' : 0.5,
             'color':'#0C58A7',
             'radious': '3px',
-             
+
     }
 def highlight_fcn(x):
     return { 'fillColor': '#000000' }
@@ -28,25 +28,25 @@ def index(request):
     gd = open(os.path.join(settings.BASE_DIR, 'multi/offices.geojson'))
     jsondata = json.load(gd)
     m = folium.Map(location=[24.696934226366672,46.69189453125]  ,  tiles=None ,zoom_start=10, control_scale=True)
-       
+
     #test
-    
-    
+
+
     #mini map
     MiniMap = plugins.MiniMap(toggle_display=True)
     m.add_child(MiniMap)
-    plugins.Fullscreen(position='topright').add_to(m)    
-    
+    plugins.Fullscreen(position='topright').add_to(m)
+
     #base map
     base_map = folium.FeatureGroup(name='Basemap', overlay=True, control=False)
     folium.TileLayer(tiles='OpenStreetMap').add_to(base_map)
-    base_map.add_to(m)   
-       
-       
+    base_map.add_to(m)
+
+
     #boys sub group
-    
+
     boys = plugins.FeatureGroupSubGroup(base_map,'بنين',overlay=False)
-    
+
     m.add_child(boys)
 
 
@@ -55,13 +55,13 @@ def index(request):
     m.add_child(girls)
 
     #connect to sub maps
-    folium.GeoJson('multi/boys.geojson',
+    folium.GeoJson(os.path.join(settings.BASE_DIR, 'multi/boys.geojson'),
     style_function=style_fcn,
-    highlight_function=highlight_fcn ,   
+    highlight_function=highlight_fcn ,
     ).add_to(boys)
-    folium.GeoJson('multi/girls.geojson',
+    folium.GeoJson(os.path.join(settings.BASE_DIR, 'multi/girls.geojson'),
     style_function=style_fcn,
-    highlight_function=highlight_fcn ,   
+    highlight_function=highlight_fcn ,
     ).add_to(girls)
 
     #add layer control
@@ -74,9 +74,9 @@ def index(request):
 
 
 
-    
-    
-    
+
+
+
     #render map
     m = m._repr_html_()
     return render(request,'pages/index.html',{'m':m})
