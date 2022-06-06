@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 import folium
 import Schools
 from .models import school
+from .models import projects
 from django.contrib.auth.models import User
 from django.db.models import Q
 
@@ -76,6 +77,8 @@ def office_details(request,office_name):
     od = paginator.get_page(page_number)
     return render(request,'schools/office_details.html',{'od':od,'office_name': office_name})
 
-
+def all_projects(request):
+    context = projects.objects.all()
+    return render(request,'schools/projects.html',{'context' :context})
 
 
