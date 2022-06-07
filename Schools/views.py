@@ -77,8 +77,14 @@ def office_details(request,office_name):
     od = paginator.get_page(page_number)
     return render(request,'schools/office_details.html',{'od':od,'office_name': office_name})
 
-def all_projects(request):
-    context = projects.objects.all()
+def all_projects(request,project_type):
+    context = projects.objects.filter(project_type=project_type)
     return render(request,'schools/projects.html',{'context' :context})
 
+
+
+def ProjectTypes(request):
+    #context = projects.objects.filter(project_type='مشاريع تم تشغيلها خلال العام الدراسي الحالي')
+    context = projects.objects.values('project_type').distinct() #.values_list('project_type',flat=True).distinct()
+    return render(request,'schools/ProjectsTypes.html',{'context':context})
 
