@@ -9,6 +9,7 @@ from .models import school
 from .models import projects
 from django.contrib.auth.models import User
 from django.db.models import Q
+from folium import GeoJsonTooltip, plugins
 
 app_name= Schools
 
@@ -71,11 +72,28 @@ def offices_list(request):
 
 
 def office_details(request,office_name):
-    od = school.objects.filter(office = office_name ) 
+    od = school.objects.filter(office = office_name )
+
+    m = folium.Map(location=[24.696934226366672,46.69189453125]  ,  tiles=None ,zoom_start=12, control_scale=True)
+    base_map = folium.FeatureGroup(name='Basemap', overlay=True, control=False)
+    folium.TileLayer(tiles='OpenStreetMap').add_to(base_map)
+    base_map.add_to(m)
+    for i in od:
+        if type(i.latitude ) == float :
+            if type(i.longitude ) == float :
+                folium.Marker([i.latitude,i.longitude]).add_to(m)
+
+    #add layer control
+    folium.LayerControl(collapsed=False).add_to(m)
+
+    m = m._repr_html_()
+    # الخريطة
+
+
     paginator = Paginator(od, 10)
     page_number = request.GET.get('page')
     od = paginator.get_page(page_number)
-    return render(request,'schools/office_details.html',{'od':od,'office_name': office_name})
+    return render(request,'schools/office_details.html',{'od':od,'office_name': office_name,'m':m})
 
 def all_projects(request,project_type):
     context = projects.objects.filter(project_type=project_type)
