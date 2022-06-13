@@ -12,28 +12,28 @@
 
     </title>
 
-      
+
   </head>
 <!-- top side-->
 <div class="container ">
   <div class="mt-2">
     <div class="" style="width: 100%;">
-     
-     
+
+
 
         <!-- الجدول -->
-        
-         
+
+
               <div id="accordion">
                   <div class="card   ">
                       <div class="card-header text-center text-success " >
                           <h5 class="mb-1">
 
                               {{d.school_name}}
-                              
+
                           </h5>
                       </div>
-      
+
                       <div  class="collapse show " aria-labelledby="headingOne" data-parent="#accordion">
                           <div class="card-body card  bg-light  ">
                             <div class="table-responsive  ">
@@ -67,10 +67,10 @@
                                           <td>{{d.school_Quarter}}</td>
                                           <td>{{d.school_in}}</td>
                                           <td>{{d.school_manager_name}}</td>
-                                          <td>{{d.school_manager_mobile}}</td>
+                                          <!--<td>{{d.school_manager_mobile}}</td>-->
                                       </tr>
                                   </tbody>
-                                  
+
                               </table>
                             </div>
                           </div>
@@ -78,13 +78,13 @@
                   </div>
               </div>
           </div>
-        
 
 
 
 
-    
-    
+
+
+
     <!-- map -->
     <div  class="mt-2" >
       <!-- {% if map != null %}
@@ -100,7 +100,7 @@
 </div>
 
 
-  
+
       <!-- جدول الملاحظات -->
     <!-- <div class="container">
         <div class="card card-header text-center my-4">
@@ -117,8 +117,8 @@
           </thead>
           <tbody>
               <tr>
-                
-                
+
+
                 {%if note %}
                 <tr>
                   <th> رقم المدرسة</th>
@@ -135,21 +135,21 @@
                   <td>{{note.created_dt | date}}</td>
                   <td>{{note.created_user}}</td>
                  <br>
-                                 
+
                  {% endfor %}
-                 {%else%} 
+                 {%else%}
                     <h6>لا يوجد ملاحظات</h6>
                 {%endif%}
 
-                
-                
+
+
             </tr>
-           
+
           </tbody>
       </table> -->
-      
+
     <!-- </div> -->
-  
+
 </div>
 
 {% endblock content %}

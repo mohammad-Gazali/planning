@@ -12,81 +12,17 @@
 
   </head>
 <body>
-<!-- top side-->
-
-
-
-  <div id= 'mainDiv' class=" container row">
-    <div id = 'schools' style="width: 50%;" class="container">
-      <div id="results" class="card">
-        <div class="card-header text-center">قائمة المدارس </div>
-        <div class="card-body">
-        {%for i in od%}
-      <a style="text-decoration: none;" href="{% url 'detail' i.school_nu %}">{{i.school_name}}</a><p></p>
-      {%endfor%}
-      </div>
-      <!-- pagination -->
-      <div class="col-4  mt-3 offset-1 ">
-        <nav aria-label="">
-          <ul class="pagination">
-      
-            {% if od.has_previous %}
-              <li class="page-item">
-                <a href="?page={{ od.previous_page_number }}" class="page-link">السابق</a>
-              </li>
-              <li>
-                <a class="page-link" href="?page={{ od.previous_page_number }}">
-                  {{ od.previous_page_number }}
-                </a>
-              </li>
-            {% else %}
-              <li class="page-item disabled">
-                <span class="page-link">السابق</span>
-              </li>
-            {% endif %}
-      
-            <li class="page-item active">
-              <span class="page-link">{{ od.number }}</span>
-            </li>
-      
-            {% if od.has_next %}
-              <li class="page-item">
-                <a class="page-link" href="?page={{ od.next_page_number }}">
-                  {{ od.next_page_number }}
-                </a>
-              </li>
-              <li class="page-item ">
-                <a class="page-link" href="?page={{ od.next_page_number }}">التالي</a>
-              </li>
-            {% else %}
-              <li class="page-item disabled">
-                <span class="page-link">التالي</span>
-              </li>
-            {% endif %}
-      
-          </ul>
-        </nav>
-      </div>
-      
-    </div>
-
-
+<nav class="navbar navbar-light bg-light">
+  <h4 style="margin: auto; color: #1e2f52 ;" class=""> {{office_name}}</h4>
+</nav>
+<div >
+  <div   >
+            {{m | safe}}
   </div>
 
 
-    <div class="container  row mt-3">
-      <div class='card  ' style="width: 100%; border: 3px;border-radius: 10px;">
-        
-
-              
-      </div>
-      <div class='row' style="width: 40%; border: 3px;border-radius: 10px;">
-
-      </div>
-      
-     
-    </div>
 </div>
+
 </body>
 </html>
 {% endblock content %}
