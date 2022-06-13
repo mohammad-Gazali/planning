@@ -1,8 +1,13 @@
 {% extends 'base.html'  %}
 {% block content %}
 <div class="row   justify-content-center ">
+<<<<<<< HEAD
 
 
+=======
+    
+    
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
     <table class="table tbl-container bdr" style="width: 90%; height: 400px; margin-top: 5px;
     margin-left: 10px;border-radius: 10px;
   overflow: hidden;">
@@ -17,12 +22,21 @@
           <th scope="col">نسبة الإنجاز</th>
           <th scope="col">المكتب</th>
           <th scope="col">موقع المشروع</th>
+<<<<<<< HEAD
 
         </tr>
       </thead>
 
       <tbody>
       {% for i in context %}
+=======
+          
+        </tr>
+      </thead>
+      
+      <tbody>
+      {% for i in context %}  
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
         <tr >
           <th scope="">{{i.project_number}}</th>
           <td class="">{{i.project_name}}</td>
@@ -34,14 +48,26 @@
             <div class="progress">
               <div class="progress-bar" role="progressbar" style="width: {{i.project_completion_rate}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{i.project_completion_rate}}%</div>
             </div>
+<<<<<<< HEAD
           </td>
           <td class="">{{i.project_office}}</td>
           <td class=""> <a href="{{i.project_location}}" target="_blank"> موقع المشروع</a> </td>
 
+=======
+           
+          </td>
+          <td class="">{{i.project_office}}</td>
+          <td class=""> <a href="{{i.project_location}}" target="_blank"> موقع المشروع</a> </td>
+          
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
         </tr>
       {% endfor%}
       </tbody>
     </table>
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
     </div>
 {% endblock content %}

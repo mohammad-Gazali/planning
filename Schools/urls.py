@@ -10,5 +10,9 @@ urlpatterns = [
     path('office_details/<str:office_name>',views.office_details,name='office_details'),
     path('projects/<str:project_type>',views.all_projects,name='all_projects'),
     path('ProjectsTypes/',views.ProjectTypes,name='ProjectsTypes'),
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
     ]
