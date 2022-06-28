@@ -21,8 +21,8 @@
   <div  class=" row  col-8  ">
   <form action="" method="get" class=" ">
     <div class="input-group  ">
-    <input type="text" class="form-control form-control-lg "  name="schoolname" placeholder="أدخل اسم المدرسة أو الرقم الإحصائي للمدرسة"/>
-    <button class="input-group-text btn-success" type="submit">بحث</button>
+    <input type="text" class="form-control rounded form-control-lg "  name="schoolname" placeholder="أدخل اسم المدرسة أو الرقم الإحصائي للمدرسة"/>
+    <button class="input-group-text rounded btn-success" type="submit">بحث</button>
     </div>
   </form>
 </div>
@@ -30,32 +30,34 @@
  <!-- search section -->
 
     <div class="row   justify-content-center">
-    
-    
-    <table class="tbl-container bdr" style="width: 70%; height: 400px; margin-top: 10px;
+
+
+    <table class="table tbl-container bdr" style="width: 70%; height: 400px; margin-top: 10px;
     margin-left: 10px;border-radius: 10px;
   overflow: hidden;">
       <thead style="background-color: #A7BACF; height: 40px;">
         <tr>
           <th scope="col">الرقم الاحصائي</th>
           <th scope="col">اسم المدرسة</th>
+          <th scope="col">جنس المدرسة</th>
           <th scope="col">المكتب</th>
           <th scope="col">الحي</th>
         </tr>
       </thead>
-      
+
       <tbody>
-      {% for i in s %}  
+      {% for i in s %}
         <tr>
           <th scope="row">{{i.school_nu}}</th>
           <td ><a style="text-decoration: none;" href="{% url 'detail' i.school_nu %}">{{i.school_name}}</a><br></td>
+          <td class="col-md-1">{{i.school_gender}}</td>
           <td class="col-md-1">{{i.office}}</td>
           <td class="col-md-2">{{i.school_Quarter}}</td>
         </tr>
       {% endfor%}
       </tbody>
     </table>
-      
+
     </div>
 <br>
 <!-- pagination -->
@@ -91,7 +93,7 @@
         <li class="page-item ">
           <a class="page-link" href="?page={{ s.next_page_number }}">التالي</a>
         </li>
-        
+
 
       {% else %}
         <li class="page-item disabled">
