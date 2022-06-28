@@ -17,21 +17,40 @@
 
 </div>
 <!-- form start -->
-<div class="row justify-content-center ">
+<div class="row  justify-content-center ">
   <div  class=" row  col-8  ">
   <form action="" method="get" class=" ">
     <div class="input-group  ">
+<<<<<<< HEAD
     <input type="text" class="form-control rounded form-control-lg "  name="schoolname" placeholder="أدخل اسم المدرسة أو الرقم الإحصائي للمدرسة"/>
     <button class="input-group-text rounded btn-success" type="submit">بحث</button>
+=======
+<<<<<<< HEAD
+    <input type="text" class="form-control rounded form-control-lg "  name="schoolname" placeholder="أدخل اسم المدرسة أو الرقم الإحصائي للمدرسة"/>
+    <button class="input-group-text rounded btn-success" type="submit">بحث</button>
+=======
+    <input type="text" class="form-control form-control-lg rounded"  name="schoolname" placeholder="أدخل اسم المدرسة أو الرقم الإحصائي للمدرسة"/>
+    <button class="input-group-text rounded  btn-success" type="submit">بحث</button>
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
+>>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
     </div>
   </form>
 </div>
 
  <!-- search section -->
 
+<<<<<<< HEAD
     <div class="row   justify-content-center">
 
 
+<<<<<<< HEAD
+=======
+=======
+    <div class="row   justify-content-center ">
+    
+    
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
+>>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
     <table class="table tbl-container bdr" style="width: 70%; height: 400px; margin-top: 10px;
     margin-left: 10px;border-radius: 10px;
   overflow: hidden;">
@@ -46,8 +65,16 @@
       </thead>
 
       <tbody>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
       {% for i in s %}
         <tr>
+=======
+      {% for i in s %}  
+        <tr >
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
           <th scope="row">{{i.school_nu}}</th>
           <td ><a style="text-decoration: none;" href="{% url 'detail' i.school_nu %}">{{i.school_name}}</a><br></td>
           <td class="col-md-1">{{i.school_gender}}</td>

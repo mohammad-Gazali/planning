@@ -28,6 +28,34 @@ class school(models.Model):
         return self.school_name
 
 
+class projects(models.Model):
+    project_number = models.IntegerField(null=True,blank=True)
+    project_type = models.CharField(max_length=500, blank=True, null=True)
+    project_name = models.CharField(max_length=500, blank=True, null=True)
+    project_gender = models.CharField(max_length=50, blank=True, null=True)
+    project_class_count =  models.IntegerField(default=0)
+    project_capacity =  models.IntegerField(default=0)
+    project_completion_rate =models.DecimalField(max_digits=6, decimal_places=2)
+    project_office = models.CharField(max_length=500, blank=True, null=True)
+    project_location = models.CharField(max_length=5000, blank=True, null=True)
+
+    def __str__(self):
+        return self.project_name
+
+
+class projects(models.Model):
+    project_number = models.IntegerField(null=True,blank=True)
+    project_type = models.CharField(max_length=500, blank=True, null=True)
+    project_name = models.CharField(max_length=500, blank=True, null=True)
+    project_gender = models.CharField(max_length=50, blank=True, null=True)
+    project_class_count =  models.IntegerField(default=0)
+    project_capacity =  models.IntegerField(default=0)
+    project_completion_rate =models.DecimalField(max_digits=6, decimal_places=2)
+    project_office = models.CharField(max_length=500, blank=True, null=True)
+    project_location = models.CharField(max_length=5000, blank=True, null=True)
+
+    def __str__(self):
+        return self.project_name
 
 class projects(models.Model):
     project_number = models.IntegerField(null=True,blank=True)
