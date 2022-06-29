@@ -1,23 +1,8 @@
 {% extends 'base.html'  %}
 {% block content %}
 <div class="row   justify-content-center ">
-<<<<<<< HEAD
 
 
-=======
-<<<<<<< HEAD
-
-
-=======
-<<<<<<< HEAD
-
-
-=======
-    
-    
->>>>>>> c809a56f48d88c241dba499d48092d190fef419c
->>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
->>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
     <table class="table tbl-container bdr" style="width: 90%; height: 400px; margin-top: 5px;
     margin-left: 10px;border-radius: 10px;
   overflow: hidden;">
@@ -32,33 +17,12 @@
           <th scope="col">نسبة الإنجاز</th>
           <th scope="col">المكتب</th>
           <th scope="col">موقع المشروع</th>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
->>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
 
         </tr>
       </thead>
 
       <tbody>
       {% for i in context %}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-          
-        </tr>
-      </thead>
-      
-      <tbody>
-      {% for i in context %}  
->>>>>>> c809a56f48d88c241dba499d48092d190fef419c
->>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
->>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
         <tr >
           <th scope="">{{i.project_number}}</th>
           <td class="">{{i.project_name}}</td>
@@ -70,46 +34,14 @@
             <div class="progress">
               <div class="progress-bar" role="progressbar" style="width: {{i.project_completion_rate}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{i.project_completion_rate}}%</div>
             </div>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
->>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
           </td>
           <td class="">{{i.project_office}}</td>
           <td class=""> <a href="{{i.project_location}}" target="_blank"> موقع المشروع</a> </td>
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
-           
-          </td>
-          <td class="">{{i.project_office}}</td>
-          <td class=""> <a href="{{i.project_location}}" target="_blank"> موقع المشروع</a> </td>
-          
->>>>>>> c809a56f48d88c241dba499d48092d190fef419c
->>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
->>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
         </tr>
       {% endfor%}
       </tbody>
     </table>
-<<<<<<< HEAD
 
-=======
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> c809a56f48d88c241dba499d48092d190fef419c
->>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
->>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
     </div>
 {% endblock content %}
