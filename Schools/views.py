@@ -7,8 +7,10 @@ import folium
 import Schools
 from .models import projects
 from .models import school
+from .models import projects
 from django.contrib.auth.models import User
 from django.db.models import Q
+from folium import GeoJsonTooltip, plugins
 
 app_name= Schools
 
@@ -81,6 +83,13 @@ def office_details(request,office_name):
     od = school.objects.filter(office = office_name )
 
     m = folium.Map(location=[24.696934226366672,46.69189453125]  ,  tiles=None ,zoom_start=12, control_scale=True)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
+>>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
 
     #base map
     base_map = folium.FeatureGroup(name='Basemap', overlay=True, control=False)
@@ -90,6 +99,10 @@ def office_details(request,office_name):
 
     for i in od:
         html = f"""
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
              <table class="table table-bordered rounded " style="background-color:  #385370;
                      direction: rtl;
                     color: #fff;
@@ -129,11 +142,41 @@ def office_details(request,office_name):
 
 
 
+<<<<<<< HEAD
+=======
+=======
+             <div   style="
+
+        background-color: #73abe3;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;">
+            <h4 style="color:#f2f2f2; padding:0 5px;"> {i.school_name} </h4>
+                        <h6 style="color:#f2f2f2;padding:0 5px;"> عدد الطلاب: {i.total_class}</h6>
+                        </div>
+>>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
+>>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
             """
         if type(i.latitude ) == float :
             if type(i.longitude ) == float :
                 folium.Marker([i.latitude,i.longitude],
                 tooltip=html).add_to(m)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+    base_map = folium.FeatureGroup(name='Basemap', overlay=True, control=False)
+    folium.TileLayer(tiles='OpenStreetMap').add_to(base_map)
+    base_map.add_to(m)
+    for i in od:
+        if type(i.latitude ) == float :
+            if type(i.longitude ) == float :
+                folium.Marker([i.latitude,i.longitude]).add_to(m)
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
+>>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
+>>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
 
     #add layer control
     folium.LayerControl(collapsed=False).add_to(m)
@@ -142,6 +185,13 @@ def office_details(request,office_name):
     # الخريطة
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
+>>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
     return render(request,'schools/office_details.html',{'od':od,'office_name': office_name,'m':m})
 
 
@@ -153,7 +203,27 @@ def ProjectTypes(request):
     #context = projects.objects.filter(project_type='مشاريع تم تشغيلها خلال العام الدراسي الحالي')
     context = projects.objects.values('project_type').distinct() #.values_list('project_type',flat=True).distinct()
     return render(request,'schools/ProjectsTypes.html',{'context':context})
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+    paginator = Paginator(od, 10)
+    page_number = request.GET.get('page')
+    od = paginator.get_page(page_number)
+    return render(request,'schools/office_details.html',{'od':od,'office_name': office_name,'m':m})
+
+def all_projects(request,project_type):
+    context = projects.objects.filter(project_type=project_type)
+    return render(request,'schools/projects.html',{'context' :context})
+>>>>>>> c809a56f48d88c241dba499d48092d190fef419c
+>>>>>>> b094c157388f3a4b3bff4b7960304089cf37658b
+>>>>>>> 14dae33cdcb80f8a14e5a6e043076bd03443d115
 
 
 
+def ProjectTypes(request):
+    #context = projects.objects.filter(project_type='مشاريع تم تشغيلها خلال العام الدراسي الحالي')
+    context = projects.objects.values('project_type').distinct() #.values_list('project_type',flat=True).distinct()
+    return render(request,'schools/ProjectsTypes.html',{'context':context})
 
