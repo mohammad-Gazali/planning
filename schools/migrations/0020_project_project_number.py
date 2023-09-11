@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('schools', '0017_remove_projects_project_latitude_and_more'),
+        ('schools', '0019_remove_project_project_latitude_and_more'),
     ]
 
     operations = [

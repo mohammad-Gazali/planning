@@ -6,12 +6,12 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('Schools', '0015_remove_school_note_created_user_delete_note_and_more'),
+        ('schools', '0017_rename_childhold_density_officedensity_childhold_density_and_more'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='projects',
+            name='Project',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('project_type', models.CharField(blank=True, max_length=500, null=True)),
