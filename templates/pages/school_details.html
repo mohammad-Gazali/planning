@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ school.school_name }}{% endblock %}
+
+{% block content %}
+  <section class="max-w-screen-xl w-full p-4 mx-auto mt-10">
+    <h5 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
+      {{ school.school_name }}
+    </h5>
+    <div class="overflow-auto">
+      <table class="min-w-full text-center divide-y font-medium divide-gray-200 dark:divide-gray-700 mt-8">
+        <thead>
+          <tr class="text-xs">
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">الرقم الإحصائي</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">نوع السلطة</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">المكتب</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">المرحلة</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">جنس المدرسة</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">عدد الفصول</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">عدد الطلاب</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">معدل الكثافة</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">نوع التعليم</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">الحي</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">إدارة التعليم</th>
+            <th class="px-6 py-3 whitespace-nowrap font-medium text-gray-500 uppercase">اسم مدير/ة المدرسة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="text-sm">
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.school_nu}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.school_rule}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.office}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.school_stage}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.school_gender}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.total_class}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.total_student}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.density}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.school_education_system}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.school_quarter}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.adminstration}}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{school.school_manager_name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mt-10">
+      {{ map|safe }}
+    </div>
+  </section>
+{% endblock content %}

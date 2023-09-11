@@ -55,6 +55,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # custom context processor
+                'schools.custom_context_processor.schools_processor',
             ],
         },
     },
@@ -107,11 +110,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-STATIC_ROOT= BASE_DIR / 'staticfiles'
+
 STATIC_URL = 'static/'
+
 STATICFILES_DIRS = [ 
     BASE_DIR / 'static',
 ]
+
+STATIC_ROOT= BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -120,6 +126,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # auth urls
 LOGIN_URL ='/login'
+
 LOGIN_REDIRECT_URL = '/'
+
 LOGOUT_URL = '/logout'
+
 LOGOUT_REDIRECT_URL = '/login'

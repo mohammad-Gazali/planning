@@ -3,7 +3,6 @@
 {% block title %} الكثافة {% endblock %} {% block content %}
 
 <div >
-
     <div class="table-responsive">
         <table id="myTable" class="table table-hover table-bordered table-striped table-sm text-center table-white">
          <caption style="display: table-caption;text-align: center;caption-side: top;;font-size: x-large;">معدل الكثافة  (طالب/فصل)</caption>
@@ -20,16 +19,16 @@
             </thead>
             <tbody>
 
-            {% for i in d %}
+            {% for density in densities %}
 
                 <tr>
-                    <td>{{i.office_nu}}</td>
-                    <td>{{i.office_name}}</td>
-                    <td>{{i.childhold_density}}</td>
-                    <td>{{i.primary_density}}</td>
-                    <td>{{i.elementry_density}}</td>
-                    <td>{{i.secondary_density}}</td>
-                    <td>{{i.office_density}} </td>
+                    <td>{{ density.office_nu }}</td>
+                    <td>{{ density.office_name }}</td>
+                    <td>{{ density.childhold_density }}</td>
+                    <td>{{ density.primary_density }}</td>
+                    <td>{{ density.elementry_density }}</td>
+                    <td>{{ density.secondary_density }}</td>
+                    <td>{{ density.office_density }} </td>
                 </tr>
             {%endfor%}
         </tbody>

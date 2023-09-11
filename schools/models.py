@@ -2,7 +2,7 @@ from django.db import models
 
 
 class School(models.Model):
-    school_nu = models.CharField(max_length=30, primary_key=True,default='1')
+    school_nu = models.CharField(max_length=30, primary_key=True, default='1')
     school_name = models.CharField(max_length=500, blank=True, null=True)
     school_rule = models.CharField(max_length=500, blank=True, null=True)
     school_stage = models.CharField(max_length=50, blank=True, null=True)
@@ -11,7 +11,7 @@ class School(models.Model):
     total_class= models.IntegerField(null=True,blank=True)
     office = models.CharField(max_length=500, blank=True, null=True)
     school_education_system = models.CharField(max_length=50, blank=True, null=True)
-    school_Quarter = models.CharField(max_length=500, blank=True, null=True)
+    school_quarter = models.CharField(max_length=500, blank=True, null=True)
     school_manager_name = models.CharField(max_length=500, blank=True, null=True)
     school_manager_mobile = models.CharField(max_length=500, blank=True, null=True)
     independence = models.CharField(max_length=500, blank=True, null=True)
@@ -42,7 +42,7 @@ class OfficeDensity(models.Model):
 
     
 class Project(models.Model):
-    project_number = models.IntegerField(null=True,blank=True)
+    project_number = models.IntegerField(null=True, blank=True)
     project_type = models.CharField(max_length=500, blank=True, null=True)
     project_name = models.CharField(max_length=500, blank=True, null=True)
     project_gender = models.CharField(max_length=50, blank=True, null=True)

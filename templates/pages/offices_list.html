@@ -1,75 +1,18 @@
-{% extends 'base.html'  %}
-{% block title %}
-المكاتب
-{% endblock %}
+{% extends 'base.html' %}
+
+{% block title %}المكاتب{% endblock %}
+
 {% block content %}
-
-    <div class=" row "
-    style="display: flex;
-    justify-content: center;">
-
-        <div id="boys"  class="card  mt-3  mb-3" style="
-        width: 70%;
-
-        display: flex;
-        justify-content: center;">
-        <div class="card-body " >
-          <div class="card-header text-center border" >
-            <h2 style="color: rgb(12, 107, 170);"> قائمة المكاتب</h2>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                {% for i in b %}
-            <div style="  float:right;
-            display: flex;
-            justify-content: center;
-            width: 50%;
-
-            "
-             class="card mt-2 bg-light">
-
-              <div class="card-header  text-center">
-                <p class="card-text">
-                  <a href="{% url 'office' i.office %}" style="text-decoration: none;">{{i.office}}</a>
-                </p>
-              </div>
-
-
-
-              <!-- Gender Section -->
-
-
-              <!--<div style="display:flex;-->
-              <!--justify-content: center;">-->
-              <!--  <div >-->
-              <!--    <p class="card-body  card-text">-->
-              <!--      <a   style="text-decoration: none;" href="{% url 'office_details'  i.office 'بنين' %}">بنين</a>-->
-              <!--    </p>-->
-              <!--  </div>-->
-              <!--  <div  >-->
-              <!--    <p class="card-body  card-text">-->
-              <!--      <a   style="text-decoration: none;" href="{% url 'office_details' i.office 'بنات' %}">بنات</a>-->
-              <!--    </p>-->
-              <!--  </div>-->
-              <!--</div>-->
-              <!-- Gender Section -->
-
-              </div>
-
-            {% endfor %}
-            </li>
-          </ul>
-        </div>
-      </div>
-
-
-
-
-
-
-
-
-
-  </div>
-
+  <section class="max-w-screen-xl w-full p-4 mx-auto mt-10">
+    <h5 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
+      قائمة المكاتب
+    </h5>
+    <ul class="mt-8 flex justify-center flex-wrap gap-4">
+      {% for school in schools %}
+        <li class="w-fit p-4 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+          <a class="whitespace-nowrap text-blue-500 hover:text-blue-700 underline-offset-4 hover:underline" href="{% url 'office_details' school.office %}">{{ school.office }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
 {% endblock content %}
