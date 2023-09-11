@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}
+{{office_name}}
+{% endblock %}
+{% block content %}
+
+
+<div id="main_div">
+
+
+    <div>
+        <div style="display: flex;justify-content: center;margin: 15px;" id="titleDiv">
+            <h3>
+                {{office_name}}
+            </h3>
+        </div>
+
+
+        <div style="background-color: #bad0e8; padding-top: 7px;border-radius: 8px 8px 0 0 ;">
+
+
+            <div style="display: flex;justify-content:space-around;padding: 4px;padding-top:20px;" id="icons">
+                <div style="display: flexbox;  justify-content: center;">
+                    <div style="display: flex;justify-content:center;">
+                        <i class="fa-solid fa-child fa-2xl" style="color: #2E7D32;"></i>
+                    </div>
+                    <h6 style="display: flex;justify-content:center; margin-top: 18px;color:#2E7D32;">
+                        {{BoySchools.total_student__sum}}</h6>
+                    <h6 style="color:#2E7D32">الطلاب - بنين</h6>
+                </div>
+                <div style="display: flexbox;  justify-content: center;">
+                    <div style="display: flex;justify-content:center;">
+                        <i class="fa-solid  fa-child-dress  fa-2xl" style="color: #2E7D32;"></i>
+                    </div>
+                    <h6 style="display: flex;justify-content:center; margin-top: 18px;color: #2E7D32;">
+                        {{GirlsSchools.total_student__sum}}</h6>
+                    <h6 style="color:#2E7D32"> الطلاب - بنات</h6>
+                </div>
+                <div style="display: flexbox;  justify-content: center;">
+                    <div style="display: flex;justify-content:center;">
+                        <i class="fa-solid fa-school-flag fa-2xl" style="color: #2E7D32;"></i>
+                    </div>
+                    <h6 style="display: flex;justify-content:center; margin-top: 18px;color: #2E7D32;">
+                        {{schools_count.school_nu__count}}</h6>
+                    <h6 style="color:#2E7D32">مجموع المدارس</h6>
+                </div>
+                <div style="display: flexbox;  justify-content: center;">
+                    <div style="display: flex;justify-content:center;">
+                        <i class="fa-solid fa-building-columns fa-2xl" style="color: #2E7D32;"></i>
+                    </div>
+                    <h6 style="display: flex;justify-content:center; margin-top: 18px;color: #2E7D32;">
+                        {{classCount.total_class__sum}}</h6>
+                    <h6 style="color:#2E7D32">مجموع الفصول</h6>
+                </div>
+                <div style="display: flexbox;  justify-content: center;">
+                    <div style="display: flex;justify-content:center;">
+                        <i class="fa-solid fa-children fa-2xl" style="color: #2E7D32;"></i>
+                    </div>
+                    <h6 style="display: flex;justify-content:center; margin-top: 18px;color: #2E7D32;">
+                        {{tottal_sudents.total_student__sum}}</h6>
+                    <h6 style="color:#2E7D32"> إجمالي الطلاب</h6>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div id="StacDiv" style="border: #bad0e8 2px solid;margin-bottom: 8px;">
+        <div style="display: flex;" id="ContentDiv">
+
+            <div class="col-4" id="rightDiv">
+                <div>
+                    {{f | safe}}
+                </div>
+            </div>
+
+            <div class="col-8 rounded-top" id="LiftDiv">
+
+                <div class="col-12" id="MapDiv">
+                    {{m | safe}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+{% endblock content %}
