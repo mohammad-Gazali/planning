@@ -2,11 +2,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.http import HttpRequest, HttpResponse
-from django.db.models import Count, Sum
-from django.db.models import BaseManager
+from django.db.models import BaseManager, Count, Sum
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from schools.models import School, OfficeDensity
+from schools.models import School, OfficeDensity, Project
 from schools.helpers import style_fcn, highlight_fcn
 import folium
 import xlwt
@@ -531,3 +530,15 @@ def filters(request: HttpRequest) -> HttpResponse:
     }
 
     return render(request,'pages/filters.html', context)
+
+
+@login_required
+def all_projects(request: HttpRequest, project_type) -> HttpResponse:
+    context = Project.objects.filter(project_type=project_type)
+    return render(request,'schools/projects.html',{'context' :context})
+
+
+@login_required
+def project_types(request: HttpRequest) -> HttpResponse:
+    context = Project.objects.values('project_type').distinct()
+    return render(request,'schools/ProjectsTypes.html',{'context':context})
