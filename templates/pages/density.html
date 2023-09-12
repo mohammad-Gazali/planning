@@ -1,108 +1,129 @@
+{% extends "base.html" %}
 
-{% extends 'base.html' %}
-{% block title %} الكثافة {% endblock %} {% block content %}
+{% block title %}الكثافة{% endblock title %}
 
-<div >
-    <div class="table-responsive">
-        <table id="myTable" class="table table-hover table-bordered table-striped table-sm text-center table-white">
-         <caption style="display: table-caption;text-align: center;caption-side: top;;font-size: x-large;">معدل الكثافة  (طالب/فصل)</caption>
-            <thead>
-                <tr>
-                    <th onclick="sortTable(0)"> م <i class="bi bi-caret-up-fill second-arrow-up"></i><i class="bi bi-caret-down-fill second-arrow-down"></i> </th>
-                    <th onclick="sortTable(1)"> المكتب </th>
-                    <th> معدل الكثافة لرياض الأطفال </th>
-                    <th> معدل الكثافة  للمرحلة الابتدائية </th>
-                    <th> معدل الكثافة  للمرحلة المتوسطة </th>
-                    <th> معدل الكثافة  للمرحلة الثانوية </th>
-                    <th onclick="sortTable(2)">  معدل الكثافة <i class="bi bi-caret-up-fill first-arrow-up"></i><i class="bi bi-caret-down-fill first-arrow-down"></i></th>
-                </tr>
-            </thead>
-            <tbody>
+{% block content %}
+    <section class="max-w-screen-xl w-full mx-auto p-4 mt-10">
+        <h3 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
+            معدل الكثافة (طالب/فصل)
+        </h3>
+        <div class="overflow-x-auto my-8">
+            <table class="min-w-full whitespace-nowrap text-center text-sm divide-y divide-gray-200 dark:divide-gray-700">
+                <thead class="font-bold dark:text-white">
+                    <tr>
+                        <th class="px-6 py-3 flex gap-2 cursor-pointer" onclick="sortTable(0, this)">
+                            المعرف
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="first-arrow-up" viewBox="0 0 16 16">
+                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="first-arrow-down hidden" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
+                        </th>
+                        <th class="px-6 py-3">المكتب</th>
+                        <th class="px-6 py-3">معدل الكثافة لرياض الأطفال </th>
+                        <th class="px-6 py-3">معدل الكثافة  للمرحلة الابتدائية</th>
+                        <th class="px-6 py-3">معدل الكثافة  للمرحلة المتوسطة</th>
+                        <th class="px-6 py-3">معدل الكثافة  للمرحلة الثانوية</th>
+                        <th class="px-6 py-3 flex gap-2 cursor-pointer" onclick="sortTable(6, this)">
+                            معدل الكثافة
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="second-arrow-up hidden" viewBox="0 0 16 16">
+                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="second-arrow-down hidden" viewBox="0 0 16 16">
+                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                            </svg>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 dark:divide-gray-700 text-sm text-gray-800 dark:text-gray-200 font-medium">
+                    {% for density in densities %}
+                        <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
+                            <th class="px-6 py-4">{{ density.office_nu }}</th>
+                            <td class="px-6 py-4">{{ density.office_name }}</td>
+                            <td class="px-6 py-4">{{ density.childhold_density }}</td>
+                            <td class="px-6 py-4">{{ density.primary_density }}</td>
+                            <td class="px-6 py-4">{{ density.elementry_density }}</td>
+                            <td class="px-6 py-4">{{ density.secondary_density }}</td>
+                            <td class="px-6 py-4">{{ density.office_density }} </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </section>
 
-            {% for density in densities %}
+    <script>
+        function sortTable(columnIndex, currentRow) {
 
-                <tr>
-                    <td>{{ density.office_nu }}</td>
-                    <td>{{ density.office_name }}</td>
-                    <td>{{ density.childhold_density }}</td>
-                    <td>{{ density.primary_density }}</td>
-                    <td>{{ density.elementry_density }}</td>
-                    <td>{{ density.secondary_density }}</td>
-                    <td>{{ density.office_density }} </td>
-                </tr>
-            {%endfor%}
-        </tbody>
+            const table = currentRow.closest("table");
 
-        </table>
-    </div>
+            let rows, i, x, y, switchCount = 0;
 
+            let shouldSwitch = false;
 
+            let switching = true;
+            
+            let dir = "asc";
 
-</div>
+            const firstArrowUp = document.querySelector(".first-arrow-up");
+            const firstArrowDown = document.querySelector(".first-arrow-down");
+            const secondArrowUp = document.querySelector(".second-arrow-up");
+            const secondArrowDown = document.querySelector(".second-arrow-down");
 
-<script>
-    function sortTable(columnIndex) {
-        
-           var table, rows, switching, i, x, y, shouldSwitch, dir, switchCount = 0;
-        table = document.getElementById("myTable");
-        switching = true;
-        dir = "asc";
-        if(columnIndex===2){
-           let arrowUp=document.querySelector('.first-arrow-up')
-           let arrowDown=document.querySelector('.first-arrow-down')
+            if (columnIndex === 0) {
+                secondArrowUp.classList.add("hidden");
+                secondArrowDown.classList.add("hidden");
 
-           if(arrowUp.classList.contains('d-none')){
-            arrowUp.classList.remove('d-none')
-            arrowDown.classList.add('d-none')
-           }
-            else{
-            arrowUp.classList.add('d-none')
-            arrowDown.classList.remove('d-none')
-           }
-
-        }
-        if(columnIndex===0){
-           let arrowUp=document.querySelector('.second-arrow-up')
-           let arrowDown=document.querySelector('.second-arrow-down')
-
-           if(arrowUp.classList.contains('d-none')){
-            arrowUp.classList.remove('d-none')
-            arrowDown.classList.add('d-none')
-           }
-            else{
-            arrowUp.classList.add('d-none')
-            arrowDown.classList.remove('d-none')
-           }
-
-        }
-        while (switching) {
-            switching = false;
-            rows = table.rows;
-
-            for (i = 1; i < rows.length - 1; i++) {
-                shouldSwitch = false;
-                x = parseFloat(rows[i].getElementsByTagName("td")[columnIndex].textContent);
-                y = parseFloat(rows[i + 1].getElementsByTagName("td")[columnIndex].textContent);
-
-                if ((dir === "asc" && x > y) || (dir === "desc" && x < y)) {
-                    shouldSwitch = true;
-                    break;
+                if (firstArrowUp.classList.contains("hidden")) {
+                    firstArrowUp.classList.remove("hidden")
+                    firstArrowDown.classList.add("hidden")
+                } else {
+                    firstArrowUp.classList.add("hidden")
+                    firstArrowDown.classList.remove("hidden")
                 }
             }
 
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-                switchCount++;
-            } else {
-                if (switchCount === 0 && dir === "asc") {
-                    dir = "desc";
+            if (columnIndex === 6) {
+                firstArrowUp.classList.add("hidden");
+                firstArrowDown.classList.add("hidden");
+
+                if (secondArrowUp.classList.contains("hidden")) {
+                    secondArrowUp.classList.remove("hidden")
+                    secondArrowDown.classList.add("hidden")
+                } else {
+                    secondArrowUp.classList.add("hidden")
+                    secondArrowDown.classList.remove("hidden")
+                }
+            }
+
+            while (switching) {
+                
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < rows.length - 1; i++) {
+                    shouldSwitch = false;
+                    x = parseFloat(rows[i].getElementsByTagName("td")[columnIndex].textContent);
+                    y = parseFloat(rows[i + 1].getElementsByTagName("td")[columnIndex].textContent);
+
+                    if ((dir === "asc" && x > y) || (dir === "desc" && x < y)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
                     switching = true;
+                    switchCount++;
+                } else {
+                    if (switchCount === 0 && dir === "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
                 }
             }
         }
-    }
-</script>
-
-
-{% endblock %}
+    </script>
+{% endblock content %}

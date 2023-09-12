@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}المكاتب{% endblock %}
+{% block title %}المكاتب{% endblock title %}
 
 {% block content %}
   <section class="max-w-screen-xl w-full p-4 mx-auto mt-10">
-    <h5 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
+    <h3 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
       قائمة المكاتب
-    </h5>
+    </h3>
     <ul class="mt-8 flex justify-center flex-wrap gap-4">
       {% for school in schools %}
         <li class="w-fit p-4 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">

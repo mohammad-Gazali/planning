@@ -1,36 +1,18 @@
-{% extends 'base.html'  %}
+{% extends "base.html" %}
+
+{% block title %}تصنيف المشاريع{% endblock title %}
+
 {% block content %}
-
-<div style="height: 400px;padding-top: 85px;">
-
-    <div   class="card  " style="  float: left;">
-    <div class="card-body ">
-      <div class="card-header text-center border">تصنيف المشاريع</div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            {% for i in context %}
-        <div style="  float: left;
-        width: 50%;
-        padding: 0 10px;" class="card mt-2 bg-light">
-
-          <div class="card-body  text-center">
-
-
-            <p class="card-text">
-              <a   style="text-decoration: none;" href="{% url 'all_projects' i.project_type %}">{{i.project_type}}
-              </a>
-            </p>
-
-          </div>
-
-        </div>
-
-        {% endfor %}
-       </li>
-      </ul>
-
-    </div>
-  </div>
- </div>
-
+  <section class="max-w-screen-xl w-full p-4 mx-auto mt-10">
+    <h3 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
+      تصنيف المشاريع
+    </h3>
+    <ul class="my-8 flex justify-center flex-wrap gap-4">
+      {% for project_type in project_types %}
+        <li class="w-fit p-4 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+          <a class="whitespace-nowrap text-blue-500 hover:text-blue-700 underline-offset-4 hover:underline" href="{% url "all_projects" project_type %}">{{ project_type }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
 {% endblock content %}

@@ -1,61 +1,84 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ office_name }}{% endblock %}
+{% block title %}{{ office_name }}{% endblock title %}
 
 {% block content %}
     <section class="max-w-screen-xl w-full p-4 mx-auto mt-10">
         <h3 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
             {{office_name}}
         </h3>
-            <div style="background-color: #bad0e8; padding-top: 7px;border-radius: 8px 8px 0 0 ;">
-                <div style="display: flex;justify-content:space-around;padding: 4px;padding-top:20px;" id="icons">
-                    <div style="display: flexbox;  justify-content: center;">
-                        <div style="display: flex;justify-content:center;">
-                            <i class="fa-solid fa-child fa-2xl" style="color: #2E7D32;"></i>
-                        </div>
-                        <h6 style="display: flex;justify-content:center; margin-top: 18px;color:#2E7D32;">
-                            {{ boys_schools.total_student__sum }}</h6>
-                        <h6 style="color:#2E7D32">الطلاب - بنين</h6>
-                    </div>
-                    <div style="display: flexbox;  justify-content: center;">
-                        <div style="display: flex;justify-content:center;">
-                            <i class="fa-solid  fa-child-dress  fa-2xl" style="color: #2E7D32;"></i>
-                        </div>
-                        <h6 style="display: flex;justify-content:center; margin-top: 18px;color: #2E7D32;">
-                            {{ girls_schools.total_student__sum }}</h6>
-                        <h6 style="color:#2E7D32"> الطلاب - بنات</h6>
-                    </div>
-                    <div style="display: flexbox;  justify-content: center;">
-                        <div style="display: flex;justify-content:center;">
-                            <i class="fa-solid fa-school-flag fa-2xl" style="color: #2E7D32;"></i>
-                        </div>
-                        <h6 style="display: flex;justify-content:center; margin-top: 18px;color: #2E7D32;">
-                            {{ schools_count.school_nu__count}}</h6>
-                        <h6 style="color:#2E7D32">مجموع المدارس</h6>
-                    </div>
-                    <div style="display: flexbox;  justify-content: center;">
-                        <div style="display: flex;justify-content:center;">
-                            <i class="fa-solid fa-building-columns fa-2xl" style="color: #2E7D32;"></i>
-                        </div>
-                        <h6 style="display: flex;justify-content:center; margin-top: 18px;color: #2E7D32;">
-                            {{ class_count.total_class__sum }}</h6>
-                        <h6 style="color:#2E7D32">مجموع الفصول</h6>
-                    </div>
-                    <div style="display: flexbox;  justify-content: center;">
-                        <div style="display: flex;justify-content:center;">
-                            <i class="fa-solid fa-children fa-2xl" style="color: #2E7D32;"></i>
-                        </div>
-                        <h6 style="display: flex;justify-content:center; margin-top: 18px;color: #2E7D32;">
-                            {{ total_sudents.total_student__sum }}</h6>
-                        <h6 style="color:#2E7D32">إجمالي الطلاب</h6>
-                    </div>
+        <ul class="mt-8 mb-4 gap-6 flex flex-wrap justify-center">
+            <li class="w-44 h-44 flex flex-col items-center p-6 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+                <div class="flex justify-center items-center w-16 h-16 bg-blue-100 dark:bg-blue-50 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 fill-blue-500 dark:fill-blue-400" viewBox="0 0 320 512">
+                        <path d="M96 64a64 64 0 1 1 128 0A64 64 0 1 1 96 64zm48 320v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V287.8L59.1 321c-9.4 15-29.2 19.4-44.1 10S-4.5 301.9 4.9 287l39.9-63.3C69.7 184 113.2 160 160 160s90.3 24 115.2 63.6L315.1 287c9.4 15 4.9 34.7-10 44.1s-34.7 4.9-44.1-10L240 287.8V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V384H144z"/>
+                    </svg>
                 </div>
-            </div>
-        </div>
+                <h6 class="mt-2 text-black dark:text-white md:text-xl sm:text-lg font-medium">
+                    {{ boys_schools.total_student__sum }}
+                </h6>
+                <h6>
+                    الطلاب - بنين
+                </h6>
+            </li>
+            <li class="w-44 h-44 flex flex-col items-center p-6 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+                <div class="flex justify-center items-center w-16 h-16 bg-blue-100 dark:bg-blue-50 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 fill-blue-500 dark:fill-blue-400" viewBox="0 0 320 512">
+                        <path d="M224 64A64 64 0 1 0 96 64a64 64 0 1 0 128 0zM88 400v80c0 17.7 14.3 32 32 32s32-14.3 32-32V400h16v80c0 17.7 14.3 32 32 32s32-14.3 32-32V400h17.8c10.9 0 18.6-10.7 15.2-21.1l-31.1-93.4 28.6 37.8c10.7 14.1 30.8 16.8 44.8 6.2s16.8-30.7 6.2-44.8L254.6 207c-22.4-29.6-57.5-47-94.6-47s-72.2 17.4-94.6 47L6.5 284.7c-10.7 14.1-7.9 34.2 6.2 44.8s34.2 7.9 44.8-6.2l28.7-37.8L55 378.9C51.6 389.3 59.3 400 70.2 400H88z"/>
+                    </svg>
+                </div>
+                <h6 class="mt-2 text-black dark:text-white md:text-xl sm:text-lg font-medium">
+                    {{ girls_schools.total_student__sum }}
+                </h6>
+                <h6>
+                    الطلاب - بنات
+                </h6>
+            </li>
+            <li class="w-44 h-44 flex flex-col items-center p-6 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+                <div class="flex justify-center items-center w-16 h-16 bg-blue-100 dark:bg-blue-50 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 fill-blue-500 dark:fill-blue-400" viewBox="0 0 576 512">
+                        <path d="M288 0H400c8.8 0 16 7.2 16 16V80c0 8.8-7.2 16-16 16H320.7l89.6 64H512c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H336V400c0-26.5-21.5-48-48-48s-48 21.5-48 48V512H64c-35.3 0-64-28.7-64-64V224c0-35.3 28.7-64 64-64H165.7L256 95.5V32c0-17.7 14.3-32 32-32zm48 240a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM80 224c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H80zm368 16v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V240c0-8.8-7.2-16-16-16H464c-8.8 0-16 7.2-16 16zM80 352c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H80zm384 0c-8.8 0-16 7.2-16 16v64c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V368c0-8.8-7.2-16-16-16H464z"/>
+                    </svg>
+                </div>
+                <h6 class="mt-2 text-black dark:text-white md:text-xl sm:text-lg font-medium">
+                    {{ schools_count.school_nu__count}}
+                </h6>
+                <h6>
+                    مجموع المدارس
+                </h6>
+            </li>
+            <li class="w-44 h-44 flex flex-col items-center p-6 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+                <div class="flex justify-center items-center w-16 h-16 bg-blue-100 dark:bg-blue-50 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 fill-blue-500 dark:fill-blue-400" viewBox="0 0 512 512">
+                        <path d="M243.4 2.6l-224 96c-14 6-21.8 21-18.7 35.8S16.8 160 32 160v8c0 13.3 10.7 24 24 24H456c13.3 0 24-10.7 24-24v-8c15.2 0 28.3-10.7 31.3-25.6s-4.8-29.9-18.7-35.8l-224-96c-8-3.4-17.2-3.4-25.2 0zM128 224H64V420.3c-.6 .3-1.2 .7-1.8 1.1l-48 32c-11.7 7.8-17 22.4-12.9 35.9S17.9 512 32 512H480c14.1 0 26.5-9.2 30.6-22.7s-1.1-28.1-12.9-35.9l-48-32c-.6-.4-1.2-.7-1.8-1.1V224H384V416H344V224H280V416H232V224H168V416H128V224zM256 64a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
+                    </svg>
+                </div>
+                <h6 class="mt-2 text-black dark:text-white md:text-xl sm:text-lg font-medium">
+                    {{ class_count.total_class__sum }}
+                </h6>
+                <h6>
+                    مجموع الفصول
+                </h6>
+            </li>
+            <li class="w-44 h-44 flex flex-col items-center p-6 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+                <div class="flex justify-center items-center w-16 h-16 bg-blue-100 dark:bg-blue-50 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 fill-blue-500 dark:fill-blue-400" viewBox="0 0 640 512">
+                        <path d="M160 0a64 64 0 1 1 0 128A64 64 0 1 1 160 0zM88 480V400H70.2c-10.9 0-18.6-10.7-15.2-21.1l31.1-93.4L57.5 323.3c-10.7 14.1-30.8 16.8-44.8 6.2s-16.8-30.7-6.2-44.8L65.4 207c22.4-29.6 57.5-47 94.6-47s72.2 17.4 94.6 47l58.9 77.7c10.7 14.1 7.9 34.2-6.2 44.8s-34.2 7.9-44.8-6.2l-28.6-37.8L265 378.9c3.5 10.4-4.3 21.1-15.2 21.1H232v80c0 17.7-14.3 32-32 32s-32-14.3-32-32V400H152v80c0 17.7-14.3 32-32 32s-32-14.3-32-32zM480 0a64 64 0 1 1 0 128A64 64 0 1 1 480 0zm-8 384v96c0 17.7-14.3 32-32 32s-32-14.3-32-32V300.5L395.1 321c-9.4 15-29.2 19.4-44.1 10s-19.4-29.2-10-44.1l51.7-82.1c17.6-27.9 48.3-44.9 81.2-44.9h12.3c33 0 63.7 16.9 81.2 44.9L619.1 287c9.4 15 4.9 34.7-10 44.1s-34.7 4.9-44.1-10L552 300.5V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V384H472z"/>
+                    </svg>
+                </div>
+                <h6 class="mt-2 text-black dark:text-white md:text-xl sm:text-lg font-medium">
+                    {{ total_sudents.total_student__sum }}
+                </h6>
+                <h6>
+                    إجمالي الطلاب
+                </h6>
+            </li>
+        </ul>
 
         <div>
             {{fig|safe}}
         </div>
+
         <div class="col-12" id="MapDiv">
             {{ map|safe }}
         </div>

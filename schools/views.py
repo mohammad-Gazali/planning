@@ -34,18 +34,18 @@ def index(request: HttpRequest) -> HttpResponse:
         map_html = map._repr_html_()
 
         #connect to sub maps
-        # folium.GeoJson(
-        #     data=os.path.join(settings.BASE_DIR, 'multi/offices.geojson'),
-        #     style_function=style_fcn,
-        #     highlight_function=highlight_fcn,
-        #     tooltip=folium.features.GeoJsonTooltip(
-        #         fields=['name'],
-        #         labels=False,
-        #         style="background-color: #abdf8245;font-color: #abfd6532;font-size: 30px;color: black",
-        #     )
-        # ).add_to(map)
+        folium.GeoJson(
+            data=jsondata,
+            style_function=style_fcn,
+            highlight_function=highlight_fcn,
+            tooltip=folium.features.GeoJsonTooltip(
+                fields=["name"],
+                labels=False,
+                style="background-color: #abdf8245;font-color: #abfd6532;font-size: 30px;color: black",
+            )
+        ).add_to(map)
     
-    return render(request,'pages/index.html', { 'map': map_html })
+    return render(request,"pages/index.html", { "map": map_html })
 
 
 @login_required
@@ -53,13 +53,11 @@ def schools(request: HttpRequest) -> HttpResponse:
     
     school_name = request.GET.get("school_name") or ""
 
-    schools = School.objects.filter(Q(school_name__contains = school_name) | Q(school_nu = school_name))
-
-    schools = School.objects.filter(adminstration="إدارة التعليم بمحافظة الدوادمي")
+    schools = School.objects.filter(Q(school_name__contains = school_name) | Q(school_nu = school_name)).order_by("school_name")
 
     for group in request.user.groups.all():
         if group.name == "restricted_group":
-            schools = School.objects.filter(Q(school_name__contains = school_name) | Q(school_nu = school_name), adminstration = request.user.first_name)
+            schools = School.objects.filter(Q(school_name__contains = school_name) | Q(school_nu = school_name), adminstration=request.user.first_name).order_by("school_name")
 
     paginator = Paginator(schools, 15)
     
@@ -84,7 +82,6 @@ def school_details(request: HttpRequest, school_nu: str) -> HttpResponse:
     map = folium.Map(
         location=[school.latitude, school.longitude],
         zoom_start=14,
-        height=350,
     )
 
     html = f"""
@@ -153,7 +150,7 @@ def office_details(request: HttpRequest, office_name: str) -> HttpResponse:
     fig = px.pie(
         values=values,
         names=names,
-        color_discrete_sequence=px.colors.sequential.Blues,
+        color_discrete_sequence=px.colors.sequential.Blues_r,
         labels=names,
         hole=0.5,
     )
@@ -276,11 +273,64 @@ def office_details(request: HttpRequest, office_name: str) -> HttpResponse:
 
 
 @login_required
-def density(request: HttpRequest) -> HttpResponse:
+def filters(request: HttpRequest) -> HttpResponse:
     
-    densities = OfficeDensity.objects.all()
+    schools = School.objects.all()
 
-    return render(request, "pages/density.html", {"densities": densities})
+    for group in request.user.groups.all():
+        if group.name == "restricted_group":
+            schools = School.objects.filter(adminstration=request.user.first_name)
+
+    school_stages = set(school.school_stage for school in schools)
+    school_offices = set(school.office for school in schools)
+    school_genders = set(school.school_gender for school in schools)
+    school_education_systems = set(school.school_education_system for school in schools)
+    school_independence = set(school.independence for school in schools)
+    school_building_states = set(school.building_state for school in schools)
+    school_adminstrations = set(school.adminstration for school in schools)
+
+    school_adminstration = request.POST.getlist("school_adminstration")
+    school_gender = request.POST.getlist("school_gender")
+    school_office = request.POST.getlist("school_office")
+    school_education_system = request.POST.getlist("school_education_system")
+    school_stage = request.POST.getlist("school_stage")
+    independence = request.POST.getlist("independence")
+    school_building_state = request.POST.getlist("school_building_state")
+
+    if school_adminstration != []:
+        schools = schools.filter(adminstration__in=school_adminstration)
+
+    if school_gender != []:
+        schools= schools.filter(school_gender__in=school_gender)
+
+    if school_office != []:
+        schools = schools.filter(office__in=school_office)
+
+    if school_education_system != []:
+        schools = schools.filter(school_education_system__in = school_education_system)
+
+    if school_stage != []:
+        schools = schools.filter(school_stage__in=school_stage)
+
+    if independence != []:
+        schools = schools.filter(independence__in = independence)
+
+    if school_building_state != []:
+        schools = schools.filter(building_state__in = school_building_state)
+
+
+    request.session["ids"] = [school.school_nu for school in schools]
+
+    return render(request,"pages/filters.html", {
+        "schools": schools,
+        "school_genders": school_genders,
+        "school_offices" : school_offices,
+        "school_stages" : school_stages,
+        "school_education_systems":school_education_systems,
+        "school_independence" : school_independence,
+        "school_building_states" : school_building_states,
+        "school_adminstrations" : school_adminstrations,
+    })
 
 
 @login_required
@@ -340,99 +390,39 @@ def export_excel(request: HttpRequest) -> HttpResponse:
 
 
 @login_required
-def filters(request: HttpRequest) -> HttpResponse:
+def density(request: HttpRequest) -> HttpResponse:
     
-    school_stage = School.objects.values('school_stage').distinct()
-    s_office = School.objects.values('office').distinct()
-    s_gender = School.objects.values('school_gender').distinct()
-    e_s = School.objects.values('school_education_system').distinct()
-    s_independence = School.objects.values('independence').distinct()
-    s_building_state = School.objects.values('building_state').distinct()
-    adminstration = School.objects.values('adminstration').distinct()
+    densities = OfficeDensity.objects.all()
 
-    for group in request.user.groups.all():
-        if group.name == 'restricted_group':
-            school_stage = School.objects.filter(adminstration = request.user.first_name).values('school_stage').distinct()
-            s_office = School.objects.filter(adminstration = request.user.first_name).values('office').distinct()
-            s_gender = School.objects.filter(adminstration = request.user.first_name).values('school_gender').distinct()
-            e_s = School.objects.filter(adminstration = request.user.first_name).values('school_education_system').distinct()
-            s_independence = School.objects.filter(adminstration = request.user.first_name).values('independence').distinct()
-            s_building_state = School.objects.filter(adminstration = request.user.first_name).values('building_state').distinct()
-            adminstration = School.objects.filter(adminstration = request.user.first_name).values('adminstration').distinct()  
-    
-    qs = School.objects.all()
-
-    stage = request.POST.getlist('stage')
-    office = request.POST.getlist('office')
-    gender = request.POST.getlist('gender')
-    ef_s = request.POST.getlist('e_system')
-    independence = request.POST.getlist('independence')
-    building_state = request.POST.getlist('building_state')
-    s_adminstration = request.POST.getlist('school_adminstration')
-
-    if stage != '' and stage is not None:
-        qs = qs.filter(school_stage__in=stage)
-    else:
-        qs = qs.values_list("school_stage")
-
-    if office != '' and office is not None:
-        qs = qs.filter(office__in=office)
-
-    if gender != '' and gender is not None:
-        qs= qs.filter(school_gender__in=gender)
-
-    if ef_s != '' and ef_s is not None:
-        qs = qs.filter(school_education_system__in = ef_s)
-
-    if independence != '' and independence is not None:
-        qs = qs.filter(independence__in = independence)
-
-    if building_state != '' and building_state is not None:
-        qs = qs.filter(building_state__in = building_state)
-
-    if s_adminstration != '' and s_adminstration is not None:
-        qs = qs.filter(adminstration__in = s_adminstration)
-
-    request.session['ids'] = [school.school_nu for school in qs]
-
-    context = {
-        's_gender':s_gender,
-        's_office' : s_office,
-        'school_stage' : school_stage,
-        'e_system':e_s,
-        'queryset' : qs,
-        's_independence' : s_independence,
-        's_building_state' : s_building_state,
-        'adminstration' : s_adminstration
-    }
-
-    request.session['ids'] = [school.school_nu for school in qs]
-
-    context = {
-        's_gender':s_gender,
-        's_office' : s_office,
-        'school_stage' : school_stage,
-        'e_system':e_s,
-        'queryset' : qs,
-        's_independence' : s_independence,
-        's_building_state' : s_building_state,
-        'adminstration' : adminstration,
-    }
-
-    return render(request,'pages/filters.html', context)
+    return render(request, "pages/density.html", {"densities": densities})
 
 
 @login_required
-def all_projects(request: HttpRequest, project_type) -> HttpResponse:
+def all_projects(request: HttpRequest, project_type: str) -> HttpResponse:
 
-    context = Project.objects.filter(project_type=project_type)
+    projects = Project.objects.filter(project_type=project_type)
 
-    return render(request, 'pages/projects.html', {'context' :context})
+    # ========== This data can be used for testing this endpoint ==========
+    # projects = [
+    #     {"project_number": 1, "project_type": project_type, "project_name": "المشروع الأول", "project_gender": "بنين", "project_class_count": 30, "project_capacity": 200, "project_completion_rate": 70, "project_office": "المكتب الأول", "project_location": "https://google.com"},
+    #     {"project_number": 2, "project_type": project_type, "project_name": "المشروع الثاني", "project_gender": "بنين", "project_class_count": 20, "project_capacity": 1000, "project_completion_rate": 10, "project_office": "المكتب الأول", "project_location": "https://google.com"},
+    #     {"project_number": 3, "project_type": project_type, "project_name": "المشروع الثالث", "project_gender": "بنات", "project_class_count": 100, "project_capacity": 100, "project_completion_rate": 100, "project_office": "المكتب الأول", "project_location": "https://google.com"},
+    #     {"project_number": 4, "project_type": project_type, "project_name": "المشروع الرابع", "project_gender": "بنين", "project_class_count": 190, "project_capacity": 200, "project_completion_rate": 92, "project_office": "المكتب الأول", "project_location": "https://google.com"},
+    #     {"project_number": 5, "project_type": project_type, "project_name": "المشروع الخامس", "project_gender": "بنات", "project_class_count": 10, "project_capacity": 30, "project_completion_rate": 33, "project_office": "المكتب الأول", "project_location": "https://google.com"},
+    # ]
+
+    return render(request, "pages/projects.html", {
+        "projects": projects,
+        "project_type": project_type,
+    })
 
 
 @login_required
 def project_types(request: HttpRequest) -> HttpResponse:
     
-    context = Project.objects.values('project_type').distinct()
+    project_types_query = set(project.project_type for project in Project.objects.all())
 
-    return render(request, 'pages/projects_types.html', {'context':context})
+    # ========== This data can be used for testing this endpoint ==========
+    # project_types_query = {"النوع الأول", "النوع الثاني", "النوع الثالث"}
+
+    return render(request, "pages/projects_types.html", {"project_types": project_types_query})

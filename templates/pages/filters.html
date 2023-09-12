@@ -1,322 +1,218 @@
+{% extends 'base.html' %}
 
+{% block title %}التقارير{% endblock title %}
 
-{% extends 'base.html'  %}
-{% block title %}
-التقارير
-{% endblock %}
 {% block content %}
-
-<div dir="rtl">
-
-<style>
-
-</style>
-
-
-<div class="container ">
-  
-    <form method="post">
+  <section class="max-w-screen-xl w-full mx-auto p-4 mt-10">
+    {% if request.method != "POST" %}
+      <h3 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
+        محددات التقرير
+      </h3>
+      <form class="my-8" method="POST">
         {% csrf_token %}
-        <table  style="width:95%" class="table table-bordered table-striped m-2 " >
-        <tbody >
-          
-          <tr>
-            <td style="justify-content: center; "  colspan = "4">
-           <h3 style="text-align:center; color: #0d6efd;" >
-            محددات التقرير
-           </h3>
-            </td>
-         </tr>
-
-         <tr>
-          <td style="width:10%;" > إدارة التعليم </td>
-          <td >
-            <div class="form-group">
-              <div class="form-check">
-                
-                {%for i in adminstration %}
-                <div class="form-check form-check-inline">
-                  <input  class="form-check-input " type="checkbox" name="school_adminstration" value="{{i.adminstration}}">
-                  <label class="form-check-label" for="inlineCheckbox1">{{i.adminstration}}</label>
-  
-                </div>
-                {%endfor%}
-  
-  
-              </div>
-              <input class="form-check-input "  type="checkbox"  onclick="for(c in document.getElementsByName('school_adminstration')) document.getElementsByName('school_adminstration').item(c).checked = this.checked">
-              <label class="form-check-label  text-primary  " for="inlineCheckbox1">تحديد الكل</label>
+        <fieldset class="flex flex-wrap gap-x-6 gap-y-2 mb-6">
+          <legend class="block text-sm font-bold mb-2 dark:text-white">
+            إدارة التعليم
+          </legend>
+          {% for school_adminstration in school_adminstrations %}
+            <div class="flex gap-x-2">
+              <input id="school-adminstration-{{ school_adminstration }}" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" name="school_adminstration" value="{{ school_adminstration }}">
+              <label for="school-adminstration-{{ school_adminstration }}" class="text-sm dark:text-white">{{ school_adminstration }}</label>
             </div>
-          </td>
-  
-          </tr>
-
-
-
-        <tr>
-        <td style="width:10%;" >جنس المدرسة</td>
-        <td >
-          <div class="form-group">
-            <div class="form-check">
-              {%for i in s_gender %}
-              <div class="form-check form-check-inline">
-                <input  class="form-check-input " type="checkbox" name="gender" value="{{i.school_gender}}">
-                <label class="form-check-label" for="inlineCheckbox1">{{i.school_gender}}</label>
-
-              </div>
-              {%endfor%}
-
-
-            </div>
-            <input class="form-check-input "  type="checkbox"  onclick="for(c in document.getElementsByName('gender')) document.getElementsByName('gender').item(c).checked = this.checked">
-            <label class="form-check-label  text-primary  " for="inlineCheckbox1">تحديد الكل</label>
+          {% endfor %}
+          <div class="flex gap-x-2">
+            <input id="school-adminstration-all" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"  type="checkbox"  onclick="for(c in document.getElementsByName('school_adminstration')) document.getElementsByName('school_adminstration').item(c).checked = this.checked">
+            <label for="school-adminstration-all" class="text-sm dark:text-white">تحديد الكل</label>
           </div>
-        </td>
+        </fieldset>
 
-        </tr>
-        <tr>
-        <td>مكتب التعليم</td>
-        <td>
-          <div class="form-check ">
-            {%for i in s_office %}
-
-            <div class="form-check form-check-inline ">
-              <input class="form-check-input " type="checkbox" name="office" value="{{i.office}}">
-              <label class="form-check-label" for="inlineCheckbox1">{{i.office}}</label>
+        <fieldset class="flex flex-wrap gap-x-6 gap-y-2 mb-6">
+          <legend class="block text-sm font-bold mb-2 dark:text-white">
+            جنس المدرسة
+          </legend>
+          {% for gender in school_genders %}
+            <div class="flex gap-x-2">
+              <input id="school-gender-{{ gender }}" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" name="school_gender" value="{{ gender }}">
+              <label for="school-gender-{{ gender }}" class="text-sm dark:text-white">{{ gender }}</label>
             </div>
-            {%endfor%}
+          {% endfor %}
+          <div class="flex gap-x-2">
+            <input id="school-gender-all" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" onclick="for(c in document.getElementsByName('school_gender')) document.getElementsByName('school_gender').item(c).checked = this.checked">
+            <label for="school-gender-all" class="text-sm dark:text-white">تحديد الكل</label>
           </div>
-          <input class="form-check-input " type="checkbox"  onclick="for(c in document.getElementsByName('office')) document.getElementsByName('office').item(c).checked = this.checked">
-          <label class="form-check-label text-primary" for="inlineCheckbox1">تحديد الكل</label>
-        </td>
+        </fieldset>
 
-        </tr>
+        <fieldset class="flex flex-wrap gap-x-6 gap-y-2 mb-6">
+          <legend class="block text-sm font-bold mb-2 dark:text-white">
+            مكتب التعليم
+          </legend>
+          {% for office in school_offices %}
+            <div class="flex gap-x-2">
+              <input id="school-office-{{ office }}" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" name="school_office" value="{{ office }}">
+              <label for="school-office-{{ office }}" class="text-sm dark:text-white">{{ office }}</label>
+            </div>
+          {% endfor %}
+          <div class="flex gap-x-2">
+            <input id="school-office-all" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" onclick="for(c in document.getElementsByName('school_office')) document.getElementsByName('school_office').item(c).checked = this.checked">
+            <label for="school-office-all" class="text-sm dark:text-white">تحديد الكل</label>
+          </div>
+        </fieldset>
 
+        <fieldset class="flex flex-wrap gap-x-6 gap-y-2 mb-6">
+          <legend class="block text-sm font-bold mb-2 dark:text-white">
+            نوع التعليم
+          </legend>
+          {% for education_system in school_education_systems %}
+            <div class="flex gap-x-2">
+              <input id="school-education-system-{{ education_system }}" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" name="school_education_system" value="{{ education_system }}">
+              <label for="school-education-system-{{ education_system }}" class="text-sm dark:text-white">{{ education_system }}</label>
+            </div>
+          {% endfor %}
+          <div class="flex gap-x-2">
+            <input id="school-education-system-all" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" onclick="for(c in document.getElementsByName('school_education_system')) document.getElementsByName('school_education_system').item(c).checked = this.checked">
+            <label for="school-education-system-all" class="text-sm dark:text-white">تحديد الكل</label>
+          </div>
+        </fieldset>
 
-          <tr>
-            <td>نوع التعليم</td>
-            <td>
-              <div class="form-check">
-                {%for i in e_system %}
+        <fieldset class="flex flex-wrap gap-x-6 gap-y-2 mb-6">
+          <legend class="block text-sm font-bold mb-2 dark:text-white">
+            المرحلة
+          </legend>
+          {% for school_stage in school_stages %}
+            <div class="flex gap-x-2">
+              <input id="school-stage-{{ school_stage }}" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" name="school_stage" value="{{ school_stage }}">
+              <label for="school-stage-{{ school_stage }}" class="text-sm dark:text-white">{{ school_stage }}</label>
+            </div>
+          {% endfor %}
+          <div class="flex gap-x-2">
+            <input id="school-stage-all" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" onclick="for(c in document.getElementsByName('school_stage')) document.getElementsByName('school_stage').item(c).checked = this.checked">
+            <label for="school-stage-all" class="text-sm dark:text-white">تحديد الكل</label>
+          </div>
+        </fieldset>
 
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="checkbox" name="e_system" value="{{i.school_education_system}}">
-                  <label class="form-check-label" for="inlineCheckbox1">{{i.school_education_system}}</label>
-                </div>
-                {%endfor%}
-              </div>
-              <input class="form-check-input " type="checkbox"  onclick="for(c in document.getElementsByName('e_system')) document.getElementsByName('e_system').item(c).checked = this.checked">
-              <label class="form-check-label text-primary" for="inlineCheckbox1">تحديد الكل</label>
+        <fieldset class="flex flex-wrap gap-x-6 gap-y-2 mb-6">
+          <legend class="block text-sm font-bold mb-2 dark:text-white">
+            الاستقلالية
+          </legend>
+          {% for independence in school_independence %}
+            <div class="flex gap-x-2">
+              <input id="independence-{{ independence }}" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" name="independence" value="{{ independence }}">
+              <label for="independence-{{ independence }}" class="text-sm dark:text-white">{{ independence }}</label>
+            </div>
+          {% endfor %}
+          <div class="flex gap-x-2">
+            <input id="independence-all" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" onclick="for(c in document.getElementsByName('independence')) document.getElementsByName('independence').item(c).checked = this.checked">
+            <label for="independence-all" class="text-sm dark:text-white">تحديد الكل</label>
+          </div>
+        </fieldset>
 
-            </td>
-
-            </tr>
-
-
-            <tr>
-              <td>المرحلة</td>
-              <td>
-                <div class="form-check">
-                  {%for i in school_stage %}
-
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="stage" value="{{i.school_stage}}">
-                    <label class="form-check-label" for="inlineCheckbox1">{{i.school_stage}}</label>
-                  </div>
-                  {%endfor%}
-                </div>
-                <input class="form-check-input " type="checkbox"  onclick="for(c in document.getElementsByName('stage')) document.getElementsByName('stage').item(c).checked = this.checked">
-                <label class="form-check-label text-primary" for="inlineCheckbox1">تحديد الكل</label>
-
-              </td>
-
-              </tr>
+        <fieldset class="flex flex-wrap gap-x-6 gap-y-2 mb-6">
+          <legend class="block text-sm font-bold mb-2 dark:text-white">
+            حالة المبنى
+          </legend>
+          {% for school_building_state in school_building_states %}
+            <div class="flex gap-x-2">
+              <input id="school-building-state-{{ school_building_state }}" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" name="school_building_state" value="{{ school_building_state }}">
+              <label for="school-building-state-{{ school_building_state }}" class="text-sm dark:text-white">{{ school_building_state }}</label>
+            </div>
+          {% endfor %}
+          <div class="flex gap-x-2">
+            <input id="school-building-state-all" class="shrink-0 mt-0.5 border-gray-500 rounded text-blue-600 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" type="checkbox" onclick="for(c in document.getElementsByName('school_building_state')) document.getElementsByName('school_building_state').item(c).checked = this.checked">
+            <label for="school-building-state-all" class="text-sm dark:text-white">تحديد الكل</label>
+          </div>
+        </fieldset>
+        <button 
+          type="submit" 
+          class="mt-6 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800"
+        >
+          إنشاء التقرير <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>            
+        </button>
+      </form>
+    {% else %}
+      <!-- جدول البيانات -->
+      {% if schools %}
+        <h3 class="text-center mb-8 lg:text-2xl sm:text-xl text-lg font-bold">
+          نتيجة المحددات
+          {%if schools.count < 10 %}
+            <span class="text-blue-500 dark:text-blue-400">
+              ( {{ schools.count }} مدارس )
+            </span>
+          {% else %}
+            <span class="text-blue-500 dark:text-blue-400">
+              ( {{ schools.count }} مدرسة )
+            </span>
+          {% endif %}
+        </h3>
+        <a href="{% url 'export_excel' %}" class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+          التصدير إلى إكسل <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75" />
+          </svg>            
+        </a>
+        <div class="overflow-x-auto mt-4 mb-8">
+          <table class="min-w-full text-sm text-center whitespace-nowrap divide-y divide-gray-200 dark:divide-gray-700">
+            <thead class="font-bold dark:text-white">
               <tr>
-                <td>الاستقلالية</td>
-                <td>
-                  <div class="form-check">
-                    {%for i in s_independence %}
-
-                    <div class="form-check form-check-inline">
-                      <input class="form-check-input" type="checkbox" name="independence" value="{{i.independence}}">
-                      <label class="form-check-label" for="inlineCheckbox1">{{i.independence}}</label>
-                    </div>
-                    {%endfor%}
-                  </div>
-                  <input class="form-check-input " type="checkbox"  onclick="for(c in document.getElementsByName('independence')) document.getElementsByName('independence').item(c).checked = this.checked">
-                  <label class="form-check-label text-primary" for="inlineCheckbox1">تحديد الكل</label>
-
-                </td>
-
-                </tr>
-
-                <tr>
-                  <td>حالة المبنى</td>
-                  <td>
-                    <div class="form-check">
-                      {%for i in s_building_state %}
-
-                      <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" name="building-state" value="{{i.building_state}}">
-                        <label class="form-check-label" for="inlineCheckbox1">{{i.building_state}}</label>
-                      </div>
-                      {%endfor%}
-                    </div>
-                    <input class="form-check-input " type="checkbox"  onclick="for(c in document.getElementsByName('building-state')) document.getElementsByName('building-state').item(c).checked = this.checked">
-                    <label class="form-check-label text-primary" for="inlineCheckbox1">تحديد الكل</label>
-
+                <th class="px-6 py-3">الرقم الإحصائي</th>
+                <th class="px-6 py-3">اسم المدرسة</th>
+                <th class="px-6 py-3">المرحلة</th>
+                <th class="px-6 py-3">إدارة التعليم</th>
+                <th class="px-6 py-3">الحي</th>
+                <th class="px-6 py-3">المكتب</th>
+                <th class="px-6 py-3">جنس المدرسة</th>
+                <th class="px-6 py-3">نظام التعليم</th>
+                <th class="px-6 py-3">عدد الطلاب</th>
+                <th class="px-6 py-3">عدد الفصول</th>
+                <th class="px-6 py-3">معدل الكثافة </th>
+                <th class="px-6 py-3">حالة الاستقلال</th>
+                <th class="px-6 py-3">حالة المبنى </th>
+                <th class="px-6 py-3">المدرسة الأساسية</th>
+                <th class="px-6 py-3">خط الطول</th>
+                <th class="px-6 py-3">خط العرض</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700 text-gray-800 dark:text-gray-200 font-medium">
+              {% for school in schools %}
+                <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
+                  <th class="px-6 py-4">{{school.school_nu}}</th>
+                  <td class="px-6 py-4">
+                    <a
+                      class="text-blue-500 hover:text-blue-700 underline-offset-4 hover:underline"
+                      href="{% url 'school_details' school.school_nu %}"
+                    >
+                      {{ school.school_name }}
+                    </a>
                   </td>
-
-                  </tr>
-
-
-         <tr>
-          <td style="justify-content: center;"  colspan = "4">
-            <button type="submit" class="btn btn-primary m-2 ">إنشاء التقرير</button>
-          </td>
-       </tr>
-
-        </tbody>
-        </table>
-
-    </form>
-</div>
-
-<div class="m-2" >
-
-
-<!-- جدول البيانات -->
-
-{%if request.method == 'POST'  %}
-
-{% if  queryset  %}
-  <hr/>
-
-  <table class="table " id="table">
-        <table class="table table  table-hover table-bordered table-striped table-sm text-center table-white table-responsive " id="table">
-
-     <thead>
-     <tr class="align-middle">
-        <th scope="col">الرقم الإحصائي</th>
-        <th scope="col">اسم المدرسة</th>
-        <th scope="col">المرحلة</th>
-        <th scope="col"> إدارة التعليم</th>
-        <th scope="col">الحي</th>
-        <th scope="col">المكتب</th>
-        <th scope="col">جنس المدرسة</th>
-        <th scope="col">نظام التعليم</th>
-        <th scope="col">عدد الطلاب</th>
-        <th scope="col">عدد الفصول</th>
-        <th scope="col"> معدل الكثافة </th>
-        <th scope="col">  حالة الاستقلال </th>
-        <th scope="col">  حالة المبنى </th>
-        <th scope="col"> المدرسة الأساسية </th>
-        <th scope="col"> خط الطول</th>
-        <th scope="col">خط العرض</th>
-        
-
-      </tr>
-    </thead>
-    <tbody>
-      {%for school in queryset%}
-      <tr class="align-middle">
-
-        <th scope="row" >{{school.school_nu}}</th>
-         <td>
-          <a style="text-decoration-line: none;" href="{% url 'detail' school.school_nu %} ">{{school.school_name}}</a>
-         </td>
-        <td>{{school.school_stage}}</td>
-        <td>{{school.adminstration}}</td>
-        <td>{{school.school_quarter}}</td>
-        <td>{{school.office}}</td>
-        <td>{{school.school_gender}}</td>
-        <td>{{school.school_education_system}}</td>
-        <td>{{school.total_student}}</td>
-        <td>{{school.total_class}}</td>
-        <td >{{school.density}}</td>
-        <td>{{school.independence}}</td>
-        <td>{{school.building_state}}</td>
-        <td>{{school.main_school}}</td>
-        <td>{{school.longitude|floatformat:4}}</td>
-        <td>{{school.latitude|floatformat:4}}</td>
-
-
-      </tr>
-
-      {%endfor%}
-
-
-
-    </tbody>
-
-
-
-
-
-
-
-
-
-
-      <div class="container row">
-
-        {%if queryset.count < 10%}
-
-            <span style="background-color:#0d6efd;
-            color:#f8fafa;
-            padding: 4px 8px;
-            text-align: center;
-            border-radius: 5px;
-            font-size: 30px;
-
-            ">
-            {{queryset.count}} مدارس </span>
-          </h2>
-
-        {%else %}
-
-        <span style="background-color:#0d6efd;
-        color:#f8fafa;
-        padding: 4px 8px;
-        text-align: center;
-        border-radius: 5px;
-        font-size: 30px;">
-         {{queryset.count}} مدرسة</span>
-          </h2>
-        {% endif %}
-      </div>
-      <hr>
-      <a class="btn btn-success "  style="margin-right: 15px;" href="{% url 'ExportExcel' %}">التصدير إلى Excel</a>
-
-
-    <hr/>
-  </table>
-
-  {%else%}
-
-  <div class=" m-4 ">
-    <h3 style="text-align: center; color: #fc0000;">يوجد نقص في محددات التقرير</h3>
-  </div>
-  {% endif %}
-
-
-
-</div>
-
-
-
-
-
-{% endif %}
-
-
-
-
-
-<!-- Main Div -->
-</div>
-
-
+                  <td class="px-6 py-4">{{ school.school_stage }}</td>
+                  <td class="px-6 py-4">{{ school.adminstration }}</td>
+                  <td class="px-6 py-4">{{ school.school_quarter }}</td>
+                  <td class="px-6 py-4">{{ school.office }}</td>
+                  <td class="px-6 py-4">{{ school.school_gender }}</td>
+                  <td class="px-6 py-4">{{ school.school_education_system }}</td>
+                  <td class="px-6 py-4">{{ school.total_student }}</td>
+                  <td class="px-6 py-4">{{ school.total_class }}</td>
+                  <td class="px-6 py-4">{{ school.density }}</td>
+                  <td class="px-6 py-4">{{ school.independence }}</td>
+                  <td class="px-6 py-4">{{ school.building_state }}</td>
+                  <td class="px-6 py-4">{{ school.main_school|default_if_none:"-" }}</td>
+                  <td class="px-6 py-4">{{ school.longitude|floatformat:4 }}</td>
+                  <td class="px-6 py-4">{{ school.latitude|floatformat:4 }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {%else%}
+        <div class="flex flex-wrap justify-center items-center gap-4 bg-blue-50 border border-blue-200 text-sm font-bold text-blue-600 rounded-md p-4" role="alert">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+          </svg>
+          <span>
+            المعذرة, لا يوجد نتيجة تحقق الخيارات التي حددتها سابقاً
+          </span>
+        </div>
+      {% endif %}
+    {% endif %}
+  </section>
 {% endblock content %}
-
-

@@ -26,25 +26,25 @@
     
     <!-- table -->
     <div class="overflow-x-auto mt-4">
-      <table class="min-w-full text-center divide-y divide-gray-200 dark:divide-gray-700">
-        <thead>
+      <table class="min-w-full whitespace-nowrap text-center text-sm divide-y divide-gray-200 dark:divide-gray-700">
+        <thead class="font-bold dark:text-white">
           <tr>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase">الرقم الاحصائي</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase">اسم المدرسة</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase">جنس المدرسة</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase">المكتب</th>
-            <th class="px-6 py-3 text-xs font-medium text-gray-500 uppercase">الحي</th>
+            <th class="px-6 py-3">الرقم الاحصائي</th>
+            <th class="px-6 py-3">اسم المدرسة</th>
+            <th class="px-6 py-3">جنس المدرسة</th>
+            <th class="px-6 py-3">المكتب</th>
+            <th class="px-6 py-3">الحي</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-gray-200 dark:divide-gray-700 text-sm">
+        <tbody class="divide-y divide-gray-200 dark:divide-gray-700 text-sm text-gray-800 dark:text-gray-200 font-medium">
           {% for school in page_object %}
-            <tr>
+            <tr class="odd:bg-white even:bg-gray-100 dark:odd:bg-slate-900 dark:even:bg-slate-800">
               <th
-                class="px-6 py-4 whitespace-nowrap font-medium text-gray-800 dark:text-gray-200"
+                class="px-6 py-4"
               >
                 {{ school.school_nu }}
               </th>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <td class="px-6 py-4">
                 <a
                   class="text-blue-500 hover:text-blue-700 underline-offset-4 hover:underline"
                   href="{% url 'school_details' school.school_nu %}"
@@ -52,9 +52,9 @@
                   {{ school.school_name }}
                 </a>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{ school.school_gender }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{ school.office }}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-800 dark:text-gray-200">{{ school.school_quarter }}</td>
+              <td class="px-6 py-4">{{ school.school_gender }}</td>
+              <td class="px-6 py-4">{{ school.office }}</td>
+              <td class="px-6 py-4">{{ school.school_quarter }}</td>
             </tr>
           {% endfor%}
         </tbody>
@@ -62,7 +62,7 @@
     </div>
     
     <!-- pagination -->
-    <nav class="flex justify-center items-center gap-x-2">
+    <nav class="flex flex-wrap mt-4 justify-center items-center gap-x-2">
       {% if page_object.has_previous %}
         <a class="text-gray-500 hover:text-blue-600 p-4 inline-flex items-center gap-2 rounded-md" href="?page={{ page_object.previous_page_number }}">
           <span aria-hidden="true">«</span>
