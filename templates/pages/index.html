@@ -5,9 +5,32 @@
 
 {% block content %}
     <section class="max-w-screen-xl w-full mx-auto p-4 mt-10">
-        <h3 class="text-center lg:text-2xl sm:text-xl text-lg font-bold">
-            تم تحديث البيانات بتاريخ 15-2-1445 هـ
-        </h3>
+        <div class="flex md:flex-row flex-col gap-8">
+            <div class="flex flex-col flex-1 bg-white border shadow-sm rounded-lg p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                <h3 class="text-lg pb-4 mb-4 text-center border-b font-bold text-gray-800 dark:text-white">
+                    التنبيهات
+                </h3>
+                <p class="mt-2 md:text-2xl sm:text-xl text-lg text-center flex justify-center items-center text-gray-800 dark:text-gray-400">
+                    تم تحديث البيانات بتاريخ 15-2-1445 هـ
+                </p>
+            </div>
+            <div class="flex flex-col flex-1 bg-white border shadow-sm rounded-lg p-4 md:p-5 dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                <h3 class="text-lg pb-4 mb-4 text-center border-b font-bold text-gray-800 dark:text-white">
+                    أقسام الموقع
+                </h3>
+                <ul class="mt-2 flex flex-wrap gap-4 text-gray-800 dark:text-gray-400">
+                    <li class="flex justify-center items-center flex-1 p-4 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+                        <a class="whitespace-nowrap text-blue-500 hover:text-blue-700 underline-offset-4 hover:underline" href="{% url 'schools' %}">المدارس</a>
+                    </li>
+                    <li class="flex justify-center items-center flex-1 p-4 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+                        <a class="whitespace-nowrap text-blue-500 hover:text-blue-700 underline-offset-4 hover:underline" href="{% url 'offices_list' %}">المكاتب</a>
+                    </li>
+                    <li class="flex justify-center items-center flex-1 p-4 bg-white border rounded-lg border-gray-200 shadow dark:bg-slate-800 dark:border-gray-600 text-gray-500 dark:text-gray-400">
+                        <a class="whitespace-nowrap text-blue-500 hover:text-blue-700 underline-offset-4 hover:underline" href="{% url 'filters' %}">التقارير</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <!-- الاحصاءات والخريطة -->
         <div class="my-8">
             {{ map|safe }}
