@@ -32,7 +32,7 @@
 				</div>
 			</div>
 			<div id="navbar-collapse-with-animation" class="hs-collapse font-medium hidden overflow-hidden transition-all duration-300 md:flex">
-				<ul class="flex md:flex-row flex-col md:font-medium gap-x-6">
+				<ul class="flex whitespace-nowrap md:flex-row flex-col md:font-medium gap-x-6">
 					<li class="md:p-0 p-2">
 						<a
 							href="{% url 'home' %}"
@@ -94,4 +94,9 @@
 			</div>
 		</div>
 	</nav>
+	<div class="flex justify-center text-white">
+		<span class="bg-blue-500 rounded-b-xl p-3 shadow">
+			{{ user.first_name }}
+		</span>
+	</div>
 </header>
