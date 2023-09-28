@@ -11,28 +11,32 @@
             <table class="min-w-full whitespace-nowrap text-center text-sm divide-y divide-gray-200 dark:divide-gray-700">
                 <thead class="font-bold dark:text-white">
                     <tr>
-                        <th class="px-6 py-3 flex gap-2 cursor-pointer" onclick="sortTable(0, this)">
-                            المعرف
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="first-arrow-up" viewBox="0 0 16 16">
-                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="first-arrow-down hidden" viewBox="0 0 16 16">
-                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                            </svg>
+                        <th class="px-6 py-3">
+                            <a class="flex gap-2" href="?order={% if request.GET.order == "-office_nu" %}office_nu{% else %}-office_nu{% endif %}">
+                                المعرف
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="first-arrow-up {% if request.GET.order and request.GET.order != "office_nu" %}hidden{% endif %}" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="first-arrow-down {% if request.GET.order != "-office_nu" %}hidden{% endif %}" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                </svg>
+                            </a>
                         </th>
                         <th class="px-6 py-3">المكتب</th>
                         <th class="px-6 py-3">معدل الكثافة لرياض الأطفال </th>
                         <th class="px-6 py-3">معدل الكثافة  للمرحلة الابتدائية</th>
                         <th class="px-6 py-3">معدل الكثافة  للمرحلة المتوسطة</th>
                         <th class="px-6 py-3">معدل الكثافة  للمرحلة الثانوية</th>
-                        <th class="px-6 py-3 flex gap-2 cursor-pointer" onclick="sortTable(6, this)">
-                            معدل الكثافة
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="second-arrow-up hidden" viewBox="0 0 16 16">
-                                <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="second-arrow-down hidden" viewBox="0 0 16 16">
-                                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                            </svg>
+                        <th class="px-6 py-3">
+                            <a class="flex gap-2" href="?order={% if request.GET.order == "-office_density" %}office_density{% else %}-office_density{% endif %}">
+                                معدل الكثافة
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="second-arrow-up {% if request.GET.order != "office_density" %}hidden{% endif %}" viewBox="0 0 16 16">
+                                    <path d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z"/>
+                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="second-arrow-down {% if request.GET.order != "-office_density" %}hidden{% endif %}" viewBox="0 0 16 16">
+                                    <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+                                </svg>
+                            </a>
                         </th>
                     </tr>
                 </thead>
@@ -52,78 +56,4 @@
             </table>
         </div>
     </section>
-
-    <script>
-        function sortTable(columnIndex, currentRow) {
-
-            const table = currentRow.closest("table");
-
-            let rows, i, x, y, switchCount = 0;
-
-            let shouldSwitch = false;
-
-            let switching = true;
-            
-            let dir = "asc";
-
-            const firstArrowUp = document.querySelector(".first-arrow-up");
-            const firstArrowDown = document.querySelector(".first-arrow-down");
-            const secondArrowUp = document.querySelector(".second-arrow-up");
-            const secondArrowDown = document.querySelector(".second-arrow-down");
-
-            if (columnIndex === 0) {
-                secondArrowUp.classList.add("hidden");
-                secondArrowDown.classList.add("hidden");
-
-                if (firstArrowUp.classList.contains("hidden")) {
-                    firstArrowUp.classList.remove("hidden")
-                    firstArrowDown.classList.add("hidden")
-                } else {
-                    firstArrowUp.classList.add("hidden")
-                    firstArrowDown.classList.remove("hidden")
-                }
-            }
-
-            if (columnIndex === 6) {
-                firstArrowUp.classList.add("hidden");
-                firstArrowDown.classList.add("hidden");
-
-                if (secondArrowUp.classList.contains("hidden")) {
-                    secondArrowUp.classList.remove("hidden")
-                    secondArrowDown.classList.add("hidden")
-                } else {
-                    secondArrowUp.classList.add("hidden")
-                    secondArrowDown.classList.remove("hidden")
-                }
-            }
-
-            while (switching) {
-                
-                switching = false;
-                rows = table.rows;
-
-                for (i = 1; i < rows.length - 1; i++) {
-                    shouldSwitch = false;
-                    x = parseFloat(rows[i].getElementsByTagName("td")[columnIndex].textContent);
-                    y = parseFloat(rows[i + 1].getElementsByTagName("td")[columnIndex].textContent);
-
-                    if ((dir === "asc" && x > y) || (dir === "desc" && x < y)) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-
-                if (shouldSwitch) {
-                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                    switching = true;
-                    switchCount++;
-                } else {
-                    if (switchCount === 0 && dir === "asc") {
-                        dir = "desc";
-                        switching = true;
-                    }
-                }
-            }
-        }
-    </script>
 {% endblock content %}

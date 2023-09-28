@@ -94,9 +94,11 @@
 			</div>
 		</div>
 	</nav>
-	<div class="flex justify-center text-white">
-		<span class="bg-blue-500 rounded-b-xl p-3 shadow">
-			{{ user.first_name }}
-		</span>
-	</div>
+	{% if user.is_authenticated %}
+		<div class="flex justify-center text-white">
+			<span class="bg-blue-500 rounded-b-xl p-3 shadow">
+				{{ user.first_name }}
+			</span>
+		</div>
+	{% endif %}
 </header>

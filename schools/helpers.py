@@ -7,7 +7,7 @@ def random_html_color():
     b = random.randint(0,256)
     return "#%02x%02x%02x" % (r, g, b)
 
-def style_fcn(_):
+def style_fcn(x):
     return { 
         "fillColor": random_html_color(),
         "weight" : 1,
@@ -16,5 +16,5 @@ def style_fcn(_):
         "radius": "20px",
     }
 
-def highlight_fcn(_):
+def highlight_fcn(x):
     return {"fillColor": "#000000"}

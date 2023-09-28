@@ -31,8 +31,6 @@ def index(request: HttpRequest) -> HttpResponse:
 
         folium.GeoJson(jsondata).add_to(map)
 
-        map_html = map._repr_html_()
-
         #connect to sub maps
         folium.GeoJson(
             data=jsondata,
@@ -44,6 +42,8 @@ def index(request: HttpRequest) -> HttpResponse:
                 style="background-color: #abdf8245;font-color: #abfd6532;font-size: 30px;color: black",
             )
         ).add_to(map)
+
+        map_html = map._repr_html_()
     
     return render(request,"pages/index.html", { "map": map_html })
 
@@ -65,12 +65,9 @@ def schools(request: HttpRequest) -> HttpResponse:
     
     page_object = paginator.get_page(page_number)
 
-    page_range = paginator.page_range
-
     return render(request, "pages/schools.html",{
         "page_object": page_object,
         "school_name": school_name,
-        "page_range": page_range,
     })
 
 
@@ -391,8 +388,7 @@ def export_excel(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def density(request: HttpRequest) -> HttpResponse:
-    
-    densities = OfficeDensity.objects.all()
+    densities = OfficeDensity.objects.all().order_by(request.GET.get("order") or "office_nu")
 
     return render(request, "pages/density.html", {"densities": densities})
 

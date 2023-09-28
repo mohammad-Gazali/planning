@@ -68,32 +68,23 @@
           <span aria-hidden="true">«</span>
           <span class="sr-only">السابق</span>
         </a>
+        <a class="w-10 h-10 text-gray-500 hover:text-blue-600 p-4 inline-flex items-center text-sm font-medium rounded-full" href="?page={{ page_object.previous_page_number }}">
+          {{ page_object.previous_page_number }}
+        </a>
       {% endif %}
-      {% if not request.GET.page %}
+      {% if request.GET.page %}
+        <a class="w-10 h-10 bg-blue-500 text-white p-4 inline-flex items-center justify-center text-sm font-medium rounded-full" href="?page={{ page_object.number }}" aria-current="page">
+          {{ page_object.number }}
+        </a>
+      {% else %}
         <a class="w-10 h-10 bg-blue-500 text-white p-4 inline-flex items-center justify-center text-sm font-medium rounded-full" href="?page=1" aria-current="page">
           1
         </a>
-        {% for page_number in page_range %}  
-          {% if page_number != 1 %}
-            <a class="w-10 h-10 text-gray-500 hover:text-blue-600 p-4 inline-flex items-center text-sm font-medium rounded-full" href="?page={{ page_number }}">
-              {{ page_number }}
-            </a>
-          {% endif %}
-        {% endfor %}
-      {% else %}
-        {% for page_number in page_range %}  
-          {% if page_number|stringformat:"i" == request.GET.page %}
-            <a class="w-10 h-10 bg-blue-500 text-white p-4 inline-flex items-center justify-center text-sm font-medium rounded-full" href="?page={{ page_number }}" aria-current="page">
-              {{ page_number }}
-            </a>
-          {% else %}
-            <a class="w-10 h-10 text-gray-500 hover:text-blue-600 p-4 inline-flex items-center text-sm font-medium rounded-full" href="?page={{ page_number }}">
-              {{ page_number }}
-            </a>
-          {% endif %}
-        {% endfor %}
       {% endif %}
       {% if page_object.has_next %}
+        <a class="w-10 h-10 text-gray-500 hover:text-blue-600 p-4 inline-flex items-center text-sm font-medium rounded-full" href="?page={{ page_object.next_page_number }}">
+          {{ page_object.next_page_number }}
+        </a>
         <a class="text-gray-500 hover:text-blue-600 p-4 inline-flex items-center gap-2 rounded-md" href="?page={{ page_object.next_page_number }}">
           <span class="sr-only">التالي</span>
           <span aria-hidden="true">»</span>
